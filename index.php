@@ -1,9 +1,10 @@
 <?php
-
+use \calderawp\theme\theme;
 get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+			
 
 		<?php if ( have_posts() ) : ?>
 
@@ -14,13 +15,19 @@ get_header(); ?>
 			<?php endif; ?>
 
 			<?php
-			// Start the loop.
-			while ( have_posts() ) : the_post();
+				if( theme::get_instance()->get_box_options()->use_boxes(  ) ){
+					caldera_theme_get_part( 'boxes' );
+				}else{
 
-				get_template_part( 'content', get_post_type() );
+					while (have_posts()) {
+						the_post();
 
-			// End the loop.
-			endwhile;
+
+						get_template_part('content', get_post_type());
+
+					}
+
+				}
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(

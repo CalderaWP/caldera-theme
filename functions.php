@@ -1,4 +1,5 @@
 <?php
+define( 'CALDERA_THEME_VERSION', '0.1.0' );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -119,15 +120,16 @@ add_action( 'wp_head', 'caldera_theme_javascript_detection', 0 );
  * Enqueue scripts and styles.
  */
 function caldera_theme_scripts() {
-    // Add custom fonts, used in the main stylesheet.
-    wp_enqueue_style( 'caldera_theme-fonts', caldera_theme_fonts_url(), array(), null );
 
-    // Add Genericons, used in the main stylesheet.
-    wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.2' );
+    wp_enqueue_style( 'caldera_theme-bootstrap', caldera_theme_assets_uri() . '/css/bootstrap.css' );
+    wp_enqueue_style( 'caldera_theme-font-awesome', caldera_theme_assets_uri() . '/font-awesome-4.3.0/css/font-awesome.min.css' );
+    wp_enqueue_style( 'caldera_theme-style', caldera_theme_assets_uri() . '/css/style.css' );
+    wp_enqueue_style( 'caldera_theme-animiate', caldera_theme_assets_uri() . '/css/animate.css' );
 
-    // Load our main stylesheet.
-    wp_enqueue_style( 'caldera_theme-style', get_stylesheet_uri() );
+    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_assets_uri() .'/js/bootstrap.min.js', [ 'jquery' ], CALDERA_THEME_VERSION, true );
+    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_assets_uri() .'/js/jquery.easing.min.js', [ 'jquery' ], CALDERA_THEME_VERSION, true );
 
+    /**
     // Load the Internet Explorer specific stylesheet.
     wp_enqueue_style( 'caldera_theme-ie', get_template_directory_uri() . '/css/ie.css', array( 'caldera_theme-style' ), '20141010' );
     wp_style_add_data( 'caldera_theme-ie', 'conditional', 'lt IE 9' );
@@ -135,24 +137,36 @@ function caldera_theme_scripts() {
     // Load the Internet Explorer 7 specific stylesheet.
     wp_enqueue_style( 'caldera_theme-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'caldera_theme-style' ), '20141010' );
     wp_style_add_data( 'caldera_theme-ie7', 'conditional', 'lt IE 8' );
+     */
 
-    wp_enqueue_script( 'caldera_theme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141010', true );
+    wp_enqueue_script( 'caldera_theme-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20141010', true );
 
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
 
     if ( is_singular() && wp_attachment_is_image() ) {
-        wp_enqueue_script( 'caldera_theme-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20141010' );
+        wp_enqueue_script( 'caldera_theme-keyboard-image-navigation', get_template_directory_uri() . '/assets/keyboard-image-navigation.js', array( 'jquery' ), '20141010' );
     }
 
-    wp_enqueue_script( 'caldera_theme-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20150330', true );
+    wp_enqueue_script( 'caldera_theme-script', get_template_directory_uri() . '/assets/js/functions.js', array( 'jquery' ), '20150330', true );
     wp_localize_script( 'caldera_theme-script', 'screenReaderText', array(
         'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'caldera_theme' ) . '</span>',
         'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', 'caldera_theme' ) . '</span>',
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
+
+
+function caldera_theme_assets_uri( $child = true ){
+    $uri = get_stylesheet_directory_uri();
+    if( ! $child ){
+        $uri = get_template_directory_uri();
+    }
+
+    $uri .= '/assets';
+    return apply_filters( 'caldera_theme_assets_uri', $uri );
+}
 
 /**
  * Add featured image as background image to post navigation elements.
@@ -234,3 +248,38 @@ add_filter( 'get_search_form', 'caldera_theme_search_form_modify' );
  */
 require get_template_directory() . '/inc/template-tags.php';
 
+
+/**
+ * Load the classes
+ */
+add_action( 'init', function(){
+   spl_autoload_register( function( $class ){
+       if( 0 ==  strpos( $class, "calderawp\\theme\\" ) ){
+           $file = __DIR__ . '/inc/classes/' . str_replace( "calderawp\\theme\\", '', $class ) . '.php';
+           include_once  $file;
+       }
+
+   }) ;
+
+     \calderawp\theme\theme::get_instance();
+});
+
+
+function caldera_theme_get_part( $first, $second = null,array $data = [] ){
+    get_template_part( 'parts/' . $first, $second );
+}
+
+function caldera_theme_thumbnail( $post, $classes = '', $size = 'post-thumbnail' ){
+    $id = get_post_thumbnail_id( $post );
+    $attrs = [];
+    if( ! empty( $classes ) ){
+        $attrs = [ 'class' => $classes ];
+    }
+    return wp_get_attachment_image( $id, $size, false, $attrs );
+}
+
+function caldera_theme_tile( $post, $style_count ){
+    ob_start();
+    include  __DIR__ . '/parts/tile.php';
+    return ob_get_clean();
+}
