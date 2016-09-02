@@ -3,8 +3,40 @@ use \calderawp\theme\theme;
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			
+
+		<?php
+			$title = $content = '';
+			if( is_archive() ) {
+				$title = get_the_archive_title() ;
+				$content = sprintf('<p class="taxonomy-description">%s</p>', get_the_archive_description());
+			}elseif( is_singular() ){
+				global $post;
+				$content = caldera_theme_get_part( 'content', get_post_type(), get_post() );
+			}else{
+				if( ! is_home() && ! empty( get_the_title() ) ){
+					$title = get_the_title();
+				}else{
+					$title = get_bloginfo( 'blogname' );
+				}
+			}
+
+		   ?>
+
+			<section id="main-contain"><!-- start main-contain -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<?php
+								if ( ! empty( $title ) ) {
+									printf('<h1 class="page-title">%s</h1>', $title);
+								}
+								echo $content;
+							?>
+						</div>
+					</div>
+				</div>
+			</section><!--  -->
+
 
 		<?php if ( have_posts() ) : ?>
 
@@ -15,8 +47,8 @@ get_header(); ?>
 			<?php endif; ?>
 
 			<?php
-				if( theme::get_instance()->get_box_options()->use_boxes(  ) ){
-					caldera_theme_get_part( 'boxes' );
+				if( theme::get_instance()->get_box_options()->use_boxes() ){
+					echo caldera_theme_get_part( 'boxes' );
 				}else{
 
 					while (have_posts()) {
@@ -43,7 +75,6 @@ get_header(); ?>
 		endif;
 		?>
 
-		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
 <?php get_footer(); ?>

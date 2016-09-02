@@ -265,8 +265,13 @@ add_action( 'init', function(){
 });
 
 
-function caldera_theme_get_part( $first, $second = null,array $data = [] ){
+function caldera_theme_get_part( $first, $second = null, $post = null ){
+    if( null == $post ){
+        $post = get_post();
+    }
+    ob_start();
     get_template_part( 'parts/' . $first, $second );
+    return ob_get_clean();
 }
 
 function caldera_theme_thumbnail( $post, $classes = '', $size = 'post-thumbnail' ){
