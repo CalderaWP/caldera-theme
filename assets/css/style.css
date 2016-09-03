@@ -1001,3 +1001,9 @@ input[type="checkbox"], input[type="radio"] {
 		width: 100%;
 	}
 }
+
+span.image.main img {
+	max-width: 1140px;
+	height: auto;
+	width: 100%;
+}
