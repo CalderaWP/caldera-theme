@@ -254,7 +254,7 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 add_action( 'init', function(){
    spl_autoload_register( function( $class ){
-       if( 0 ==  strpos( $class, "calderawp\\theme\\" ) ){
+       if( 0 ===  strpos( $class, "calderawp\\theme\\" ) ){
            $file = __DIR__ . '/inc/classes/' . str_replace( "calderawp\\theme\\", '', $class ) . '.php';
            include_once  $file;
        }
