@@ -1,4 +1,5 @@
 <?php
+use calderawp\theme\theme;
 global  $post;
 remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 ?>
@@ -17,7 +18,7 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 
 	<div class="row">
 		<div class="col-md-12">
-			<?php echo caldera_theme_foogallery( 29 ); ?>
+			<?php echo caldera_theme_foogallery( theme::get_instance()->get_download_foo_gallery_id() ); ?>
 		</div>
 	</div>
 	<div class="entry-content">

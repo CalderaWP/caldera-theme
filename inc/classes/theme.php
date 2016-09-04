@@ -94,6 +94,15 @@ class theme{
     }
 
     /**
+     * Get ID of the FooGallery used for the download image gallery
+     *
+     * @return int
+     */
+    public function get_download_foo_gallery_id(){
+        return intval( apply_filters('caldera_theme_download_foo_gallery_id', 31 ) );
+    }
+
+    /**
      * Get a page settings or download_settings instance. Handles lazyloading/cache/etc
      *
      * @param $id
