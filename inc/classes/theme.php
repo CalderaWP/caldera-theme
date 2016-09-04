@@ -2,13 +2,47 @@
 
 namespace calderawp\theme;
 
-
+/**
+ * Class theme
+ *
+ * The smelly god class for theme
+ *
+ * @package calderawp\theme
+ */
 class theme{
 
-
+    /**
+     * Option key for whether or not this site uses box type index or not.
+     */
     CONST BOX_KEY = 'caldera_theme_box_settings';
 
-    CONST PAGE_KEY = 'caldera_theme_page_settings';
+    /**
+     * Meta key for show menu option
+     *
+     * @string
+     */
+    CONST PAGE_MENU_KEY = 'caldera_theme_show_menu';
+
+    /**
+     * Meta key for full width option
+     */
+    CONST PAGE_FW_KEY = 'caldera_theme_fullwidth';
+
+    /**
+     * Meta key for product images
+     */
+    CONST PRODUCT_IMAGES_KEY = 'caldera_theme_product_images';
+
+    /**
+     * Meta key for product tagline
+     */
+    CONST TAGLINE_KEY = 'caldera_theme_tagline';
+
+    /**
+     * Meta key for product order
+     */
+    CONST ORDER_KEY = 'caldera_theme_order';
+
 
     /**
      * @var theme
@@ -16,14 +50,23 @@ class theme{
     protected static $instance;
 
     /**
+     * Holds download a page settings instances
+     *
      * @var array
      */
-    protected $page_settings = [];
+    protected $settings = [];
 
     /**
      * @var box_options
      */
     protected $box_options;
+
+    /**
+     * CM2 loader class (not a CMB2 instance)
+     *
+     * @var cmb2
+     */
+    protected $cmb2;
 
     /**
      * @return theme
@@ -38,6 +81,7 @@ class theme{
 
     private function __construct(){
         $this->box_options = new box_options( get_option( self::BOX_KEY, [] ) );
+        $this->cmb2 = new cmb2();
     }
 
     /**
@@ -50,32 +94,66 @@ class theme{
     }
 
     /**
-     * Get a page settings instance. Handles lazyloading/cache/etc
+     * Get a page settings or download_settings instance. Handles lazyloading/cache/etc
      *
      * @param $id
-     * @return page_settings
+     * @return page_settings|download_settings|\stdClass
      */
-    public function get_page_settings( $id ){
-        if( isset( $this->page_settings[ $id ] ) ) {
-            $this->page_settings[ $id ] = $this->create_a_page_settings($id);
+    public function get_settings( $id ){
+        if( ! isset( $this->settings[ $id ] ) ) {
+            if ( 'page' == get_post_type( $id ) ) {
+                $this->settings[$id] = $this->create_a_page_settings($id);
+            } elseif( 'download' == get_post_type( $id ) ) {
+                $this->settings[$id] = $this->create_a_download_settings( $id );
+            }else{
+                return new \stdClass();
+            }
         }
 
-        return $this->page_settings[ $id ];
+        return $this->settings[ $id ];
     }
 
     /**
-     * Create a new page setttings instance
+     * Create a new page_settings instance
      *
      * @param int $id
      * @return page_settings
      */
     protected function create_a_page_settings($id){
-        $meta = get_post_meta($id, self::PAGE_KEY);
-        if (empty($meta)) {
-            $meta = [];
+        $meta = [];
+        $metas = [
+            'show_menu' => self::PAGE_MENU_KEY,
+            'full_width_header' => self::PAGE_FW_KEY,
+        ];
+
+        foreach( $metas as $meta => $key ){
+            $meta[ $meta ] = get_post_meta( $id, $key, true );
         }
 
        return new page_settings($meta);
+    }
+
+    /**
+     * Create a new download_settings instance
+     *
+     * @param int $id
+     * @return download_settings
+     */
+    protected function create_a_download_settings($id){
+        $meta = [];
+        $metas = [
+            'show_menu' => self::PAGE_MENU_KEY,
+            'full_width_header' => self::PAGE_FW_KEY,
+            'images' => self::PRODUCT_IMAGES_KEY,
+            'tagline' => self::TAGLINE_KEY,
+            'order' => self::ORDER_KEY
+        ];
+
+        foreach( $metas as $meta => $key ){
+            $meta[ $meta ] = get_post_meta( $id, $key, true );
+        }
+
+        return new download_settings($meta);
     }
 
 
