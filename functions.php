@@ -250,22 +250,6 @@ add_filter( 'get_search_form', 'caldera_theme_search_form_modify' );
 require get_template_directory() . '/inc/template-tags.php';
 
 
-/**
- * Load the classes
- */
-add_action('init', function () {
-    spl_autoload_register(function ($class) {
-        if (0 === strpos($class, "calderawp\\theme\\")) {
-            $file = __DIR__ . '/inc/classes/' . str_replace("calderawp\\theme\\", '', $class) . '.php';
-            include_once $file;
-        }
-
-    });
-
-    theme::get_instance();
-});
-
-
 function caldera_theme_get_part( $first, $second = null, $post = null ){
     if( null == $post ){
         $post = get_post();
