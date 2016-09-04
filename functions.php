@@ -1,4 +1,5 @@
 <?php
+use \calderawp\theme\theme;
 define( 'CALDERA_THEME_VERSION', '0.1.0' );
 
 /**
@@ -252,16 +253,16 @@ require get_template_directory() . '/inc/template-tags.php';
 /**
  * Load the classes
  */
-add_action( 'init', function(){
-   spl_autoload_register( function( $class ){
-       if( 0 ===  strpos( $class, "calderawp\\theme\\" ) ){
-           $file = __DIR__ . '/inc/classes/' . str_replace( "calderawp\\theme\\", '', $class ) . '.php';
-           include_once  $file;
-       }
+add_action('init', function () {
+    spl_autoload_register(function ($class) {
+        if (0 === strpos($class, "calderawp\\theme\\")) {
+            $file = __DIR__ . '/inc/classes/' . str_replace("calderawp\\theme\\", '', $class) . '.php';
+            include_once $file;
+        }
 
-   }) ;
+    });
 
-     \calderawp\theme\theme::get_instance();
+    theme::get_instance();
 });
 
 
@@ -287,4 +288,41 @@ function caldera_theme_tile( $post, $style_count ){
     ob_start();
     include  __DIR__ . '/parts/tile.php';
     return ob_get_clean();
+}
+
+add_filter( 'get_post_metadata', function( $return_value, $object_id, $meta_key ){
+    if( FOOGALLERY_META_ATTACHMENTS == $meta_key ){
+        global $post;
+        if( ! empty( $post  ) && 'download' == $post->post_type ){
+            $meta = get_post_meta( $post->ID, theme::PRODUCT_IMAGES_KEY, true );
+            if( is_array( $meta )  && isset( $meta[0])){
+                $meta[0] = array_filter( array_keys( $meta[0] ), 'absint' );
+                $return_value = $meta;
+            }
+        }
+    }
+
+    return $return_value;
+}, 10,  3 );
+
+function caldera_theme_foogallery( $id ) {
+
+    if ( class_exists( 'FooGallery_Template_Loader' ) ) {
+        $args = array(
+            'id' => $id,
+            'gallery' => '',
+        );
+
+        $args = apply_filters('foogallery_shortcode_atts', $args);
+
+        $engine = new FooGallery_Template_Loader();
+
+        ob_start();
+
+        $engine->render_template($args);
+
+        $output_string = ob_get_contents();
+        ob_end_clean();
+        return $output_string;
+    }
 }

@@ -11,7 +11,11 @@ get_header(); ?>
 				$content = sprintf('<p class="taxonomy-description">%s</p>', get_the_archive_description());
 			}elseif( is_singular() ){
 				global $post;
-				$content = caldera_theme_get_part( 'content', 'single', get_post() );
+				$partial = 'single';
+				if( 'download' == get_post_type( $post ) ) {
+					$partial = 'download';
+				}
+				$content = caldera_theme_get_part( 'content', $partial, get_post() );
 			}else{
 				if( ! is_home() && ! empty( get_the_title() ) ){
 					$title = get_the_title();

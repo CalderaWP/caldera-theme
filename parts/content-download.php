@@ -1,25 +1,28 @@
 <?php
 global  $post;
-
-
+remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php
-		printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title( $post ) );
 
-	?>
 	<span class="image main">
 		<?php
 			// Post thumbnail.
 			echo caldera_theme_thumbnail( $post, 'large', 'img-responsive' );
 		?>
-		</span>
+	</span>
+	<?php
+		printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title( $post ) );
+	?>
 
-
-
+	<div class="row">
+		<div class="col-md-12">
+			<?php echo caldera_theme_foogallery( 29 ); ?>
+		</div>
+	</div>
 	<div class="entry-content">
 		<?php
+
 			echo apply_filters( 'the_content', $post->post_content );
 
 		?>
