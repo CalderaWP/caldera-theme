@@ -358,3 +358,12 @@ function caldera_theme_globe_logo( $size = 'md' ){
 
 
 }
+
+function caldera_theme_pagination(){
+
+    return sprintf( '<div class="row pagination-wrap"><div class="col-md-6 col-md-offset-4 col-sm-12 ">%s</div></div>', get_the_posts_pagination(array(
+        'prev_text' => __('Previous Page', 'caldera_theme'),
+        'next_text' => __('Next Page', 'caldera_theme'),
+        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __('Page', 'caldera_theme') . ' </span>',
+    ) ) );
+}
