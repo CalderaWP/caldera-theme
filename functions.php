@@ -169,7 +169,12 @@ function caldera_theme_assets_uri( $local = false ){
     if( $local ){
         $uri = get_template_directory_uri() . '/assets';
     }else{
-        $uri = 'd1dy2qw4671tuy.cloudfront.net';
+        if ( defined( 'LOCAL_DEV' ) && LOCAL_DEV ) {
+            $uri = 's3.amazonaws.com/caldera-theme';
+
+        } else {
+            $uri = 'd1dy2qw4671tuy.cloudfront.net';
+        }
         $uri = caldera_theme_add_protocol( $uri );
     }
 
