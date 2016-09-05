@@ -28,7 +28,7 @@
 							<span class="icon-bar"></span>
 						</button>
 						<a href="#" class="logo navbar-brand">
-							<span class="symbol"><img src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/logo.svg' ); ?>" class="img-responsive" alt=""></span>
+							<span class="symbol"><img src="<?php echo esc_url( caldera_theme_globe_logo( 'sm' ) ); ?>" class="img-responsive" alt=""></span>
 							<span class="title">Caldera</span>
 						</a>
 					</div>

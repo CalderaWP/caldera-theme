@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<ul class="list-inline">
-						<li><a href="#"><img src="images/logo.svg" class="img-responsive" alt=".." width="43"></a></li>
+						<li><a href="#"><img src="<?php echo esc_url( caldera_theme_globe_logo( 'sm' ) ); ?>" class="img-responsive" alt=".." width="43"></a></li>
 						<li><a href="#" class="ft-space">Contact</a></li>
 						<li><a href="#" class="ft-space">Support</a></li>
 						<li><a href="#" class="ft-space">Account</a></li>

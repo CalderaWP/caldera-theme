@@ -122,13 +122,13 @@ add_action( 'wp_head', 'caldera_theme_javascript_detection', 0 );
  */
 function caldera_theme_scripts() {
 
-    wp_enqueue_style( 'caldera_theme-bootstrap', caldera_theme_assets_uri() . '/css/bootstrap.css' );
-    wp_enqueue_style( 'caldera_theme-font-awesome', caldera_theme_assets_uri() . '/font-awesome-4.3.0/css/font-awesome.min.css' );
-    wp_enqueue_style( 'caldera_theme-style', caldera_theme_assets_uri() . '/css/style.css' );
+    wp_enqueue_style( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/bootstrap/3.0.2/css/bootstrap.min.css' )  );
+    wp_enqueue_style( 'caldera_theme-font-awesome', caldera_theme_add_protocol( 'cdn.jsdelivr.net/fontawesome/4.3.0/css/font-awesome.min.css' ) );
+    wp_enqueue_style( 'caldera_theme-style', caldera_theme_assets_uri() . '/css/style.css', [], CALDERA_THEME_VERSION );
     wp_enqueue_style( 'caldera_theme-animiate', caldera_theme_assets_uri() . '/css/animate.css' );
 
-    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_assets_uri() .'/js/bootstrap.min.js', [ 'jquery' ], CALDERA_THEME_VERSION, true );
-    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_assets_uri() .'/js/jquery.easing.min.js', [ 'jquery' ], CALDERA_THEME_VERSION, true );
+    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/bootstrap/3.0.2/js/bootstrap.min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
+    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
 
     /**
     // Load the Internet Explorer specific stylesheet.
@@ -158,15 +158,37 @@ function caldera_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
 
+/**
+ * Get URL for assets DIR via CDN, or local
+ *
+ * @param bool $local Optional. If true, the default CDN is used, else stylesheet directory URI
+ * @return mixed|void
+ */
+function caldera_theme_assets_uri( $local = false ){
 
-function caldera_theme_assets_uri( $child = true ){
-    $uri = get_stylesheet_directory_uri();
-    if( ! $child ){
-        $uri = get_template_directory_uri();
+    if( $local ){
+        $uri = get_template_directory_uri() . '/assets';
+    }else{
+        $uri = 'd1dy2qw4671tuy.cloudfront.net';
+        $uri = caldera_theme_add_protocol( $uri );
     }
 
-    $uri .= '/assets';
+
     return apply_filters( 'caldera_theme_assets_uri', $uri );
+}
+
+/**
+ * @param $url
+ * @return string
+ */
+function caldera_theme_add_protocol( $url ){
+    if( is_ssl() ){
+        $url = 'https://' . $url;
+    }else{
+        $url = 'http://' . $url;
+    }
+
+    return $url;
 }
 
 /**
@@ -309,4 +331,25 @@ function caldera_theme_foogallery( $id ) {
         ob_end_clean();
         return $output_string;
     }
+}
+
+/**
+ * Get URL for globe logo
+ *
+ * @param string $size
+ * @return mixed|string
+ */
+function caldera_theme_globe_logo( $size = 'md' ){
+    if( ! in_array( $size, [ 'sm', 'md', 'lg' ]) ){
+        $size = 'md';
+    }
+
+    $url = caldera_theme_add_protocol( 'd1dy2qw4671tuy.cloudfront.net/images/caldera-globe-logo.png' );
+    if( 'lg' != $size ){
+       $url = str_replace( '.png', '-' . $size . '.png', $url );
+    }
+
+    return $url;
+
+
 }
