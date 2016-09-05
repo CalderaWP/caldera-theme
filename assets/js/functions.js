@@ -173,6 +173,56 @@
 		for ( var i = 1; i < 6; i++ ) {
 			setTimeout( resizeAndScroll, 100 * i );
 		}
+
+
+			$( '.tile-article' ).hover(
+				function() {
+					 $( this ).find( '.tile-article-title' ).fadeTo(500, 0, 'swing', function(){
+						$(this).css({
+							'visibility' : 'hidden',
+							'display': 'none'
+						})
+					}).attr( 'aria-hidden', true );
+
+					$( this ).find( '.image' ).fadeTo(500, .2, 'swing' );
+
+					$( this ).find( '.tile-article-content p, .tile-article-content' ).animate({
+						'font-size' : '.9em'
+					}, 250 );
+
+					$( this ).find( '.tile-article-content' ).css({
+						'visibility' : 'visible',
+						'display': 'block'
+					}).attr( 'aria-hidden', false ).animate({
+						'margin-top' : '-100px',
+						'color': '#ffffff'
+					}, 750 );
+
+				}, function() {
+					$( this ).find( '.tile-article-title' ).fadeTo(500, 100, 'swing', function(){
+						$(this).css({
+							'visibility' : 'visible',
+							'display': 'block'
+						})
+					}).attr( 'aria-hidden', false );
+
+					$( this ).find( '.tile-article-content' ).attr( 'aria-hidden', true ).animate({
+						'margin-top' : '50px'
+					}, 750, function(){
+						$( this ).css({
+							'visibility' : 'hidden',
+							'display': 'none'
+						});
+					});
+
+					$( this ).find( '.tile-article-content p, .tile-article-content' ).animate({
+						'font-size' : 'initial'
+					}, 250 );
+
+					$( this ).find( '.image' ).fadeTo(500, 1, 'swing' );
+				}
+			);
+
 	} );
 
 } )( jQuery );
