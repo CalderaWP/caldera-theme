@@ -46,7 +46,20 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
     return $html;
 }
 
+/**
+ * Show Bundles pricing table on the bundles page
+ */
+add_filter( 'the_content', function( $content ){
+    if( is_page( 'caldera-forms-bundles' ) ){
+        $content .= caldera_theme_bundle_price_tables();
+    }
+
+    return $content;
+});
+
+
 function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '' ){
+    caldera_theme_pricing_style_css();
     if (empty($bundles)) {
         $bundles = caldera_theme_bundle_ids();
     }
@@ -59,9 +72,10 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
     $width = ceil( 12/$count );
 
     $out[] = '<div class="row price-table-wrap bundle-price-table" id="cf-bundle-price-table">';
-    $out[] = '<h2 class="text-center">Bundle Up And Save</h2>';
+
 
     if ( ! empty( $upsell_title )) {
+        $out[] = '<h2 class="text-center">Bundle Up And Save</h2>';
         $out[] = sprintf('<p class="text-center">%s is included in %d of our cost-saving bundles</p>',
             esc_html($upsell_title),
             $count
