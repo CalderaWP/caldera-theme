@@ -179,8 +179,8 @@
 				function() {
 					$( this ).animate({
 						backgroundColor: "#000"
-					}, 750 );
-					 $( this ).find( '.tile-article-title' ).fadeTo(500, 0, 'swing', function(){
+					}, 250 );
+					 $( this ).find( '.tile-article-title' ).fadeTo(750, 0, 'swing', function(){
 						$(this).css({
 							'visibility' : 'hidden',
 							'display': 'none'
@@ -202,9 +202,10 @@
 					}, 750 );
 
 				}, function() {
+
 					$( this ).animate({
 						backgroundColor: "#fff"
-					}, 750 );
+					}, 250 );
 
 					$( this ).find( '.tile-article-title' ).fadeTo(500, 100, 'swing', function(){
 						$(this).css({
