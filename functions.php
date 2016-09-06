@@ -499,3 +499,23 @@ add_action('pre_get_posts', function( WP_Query $query ) {
         }
     }
 });
+
+/**
+ * Caching wrapper for wp_oembed_get()
+ *
+ * @param $url
+ * @return false|mixed|string
+ */
+function caldera_theme_oembed_get( $url ){
+    $key = md5( __FUNCTION__ . $url );
+    if( false == ( $embed = get_transient( $key ) ) ){
+        $embed = wp_oembed_get( $url );
+        if( ! empty( $embed ) ){
+            set_transient( $key, $embed, WEEK_IN_SECONDS );
+        }
+    }
+
+    return $embed;
+
+
+}

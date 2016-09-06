@@ -1,5 +1,5 @@
 <?php
-
+use calderawp\theme\theme;
 global  $post;
 remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 ?>

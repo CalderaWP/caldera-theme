@@ -18,7 +18,7 @@
 <div id="wrapper">
 	<?php
 
-	if( theme::get_instance()->get_settings( get_queried_object_id() )->show_menu() ) : ?>
+	if( is_front_page() || theme::get_instance()->get_settings( get_queried_object_id() )->show_menu() ) : ?>
 		<section id="header"><!-- start header section -->
 			<header><!-- start header -->
 				<div class="container">
@@ -53,7 +53,7 @@
 		</section><!-- end collapsed -->
 <?php
 	endif;
-	if( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
+	if( is_front_page() || theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
 		echo caldera_theme_fullwidth_header();
 	}
 ?>

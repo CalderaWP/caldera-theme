@@ -130,10 +130,12 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
     $out[] = '</div>';
     $out[] = '<div style="clear:both;"></div>';
     $out[] = '<div class="row" id="prices-options-row">';
-    $out[] = sprintf( '<p class="text-center"><a class="" href="%s" title="See all cost saving Caldera Forms Bundles">See All Bundles</a> or <a class="see-single-prices" href="#" title="See prices for %s">Just Purchase This Add-on</a></p>',
-        esc_url( home_url( 'caldera-forms-bundles' ) ),
-        $upsell_title
-    );
+    if ( ! empty( $upsell_title )) {
+        $out[] = sprintf('<p class="text-center"><a class="" href="%s" title="See all cost saving Caldera Forms Bundles">See All Bundles</a> or <a class="see-single-prices" href="#" title="See prices for %s">Just Purchase This Add-on</a></p>',
+            esc_url(home_url('caldera-forms-bundles')),
+            $upsell_title
+        );
+    }
 
     $out[] = '</div>';
 
