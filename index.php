@@ -5,6 +5,13 @@ get_header(); ?>
 	<div id="primary" class="container content-area">
 
 		<?php
+
+			if( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
+				$full_width = true;
+			}else{
+				$full_width = false;
+			}
+
 			$title = $content = '';
 			if( is_archive() ) {
 				$title = get_the_archive_title() ;
@@ -32,7 +39,14 @@ get_header(); ?>
 						<div class="col-md-12">
 							<?php
 								if ( ! empty( $title ) ) {
-									printf('<h1 class="page-title">%s</h1>', $title);
+									$extra = '';
+									$class = 'page-title';
+									if( $full_width ){
+										$class .= ' screen-reader-text';
+										$extra = 'aria-hidden="true" style="display:none;visibility:hidden;';
+									}
+									$extra = '';
+									printf('<h1 class="%s" %s>%s</h1>', esc_attr( $class ), $extra, $title );
 								}
 								echo $content;
 							?>

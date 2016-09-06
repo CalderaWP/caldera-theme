@@ -1,5 +1,7 @@
 <?php
-?><!DOCTYPE html>
+	use \calderawp\theme\theme;
+?>
+	<!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -14,38 +16,45 @@
 
 <body <?php body_class(); ?>>
 <div id="wrapper">
+	<?php
 
-	<section id="header"><!-- start header section -->
-		<header><!-- start header -->
-			<div class="container">
-				<nav class="navbar navbar-default" role="navigation" data-spy="affix" data-offset-top="100">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a href="#" class="logo navbar-brand">
-							<span class="symbol"><img src="<?php echo esc_url( caldera_theme_globe_logo( 'sm' ) ); ?>" class="img-responsive" alt=""></span>
-							<span class="title">Caldera</span>
-						</a>
-					</div>
+	if( theme::get_instance()->get_settings( get_queried_object_id() )->show_menu() ) : ?>
+		<section id="header"><!-- start header section -->
+			<header><!-- start header -->
+				<div class="container">
+					<nav class="navbar navbar-default" role="navigation" data-spy="affix" data-offset-top="100">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a href="#" class="logo navbar-brand">
+								<span class="symbol"><img src="<?php echo esc_url( caldera_theme_globe_logo( 'sm' ) ); ?>" class="img-responsive" alt=""></span>
+								<span class="title">Caldera</span>
+							</a>
+						</div>
 
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse navbar-ex1-collapse">
-						<ul class="nav navbar-nav navbar-right">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Ipsum veroeros</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
-						</ul>
-					</div><!-- /.navbar-collapse -->
-				</nav>
-			</div>
-		</header>
-	</section><!-- end collapsed -->
-
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse navbar-ex1-collapse">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="active"><a href="index.html">Home</a></li>
+								<li><a href="generic.html">Ipsum veroeros</a></li>
+								<li><a href="generic.html">Tempus etiam</a></li>
+								<li><a href="generic.html">Consequat dolor</a></li>
+								<li><a href="elements.html">Elements</a></li>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</nav>
+				</div>
+			</header>
+		</section><!-- end collapsed -->
+<?php
+	endif;
+	if( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
+		echo caldera_theme_fullwidth_header();
+	}
+?>
 

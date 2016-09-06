@@ -1,20 +1,12 @@
 <?php
-use calderawp\theme\theme;
+
 global  $post;
 remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'container'); ?>>
 
-	<span class="image main">
-		<?php
-			// Post thumbnail.
-			echo caldera_theme_thumbnail( $post, 'large', 'img-responsive' );
-		?>
-	</span>
-	<?php
-		printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title( $post ) );
-	?>
+	<?php echo caldera_theme_get_part( 'single', 'top', $post  ); ?>
 
 
 	<div class="row" <?php if ( empty( $gallery ) ) : echo 'style="margin-bottom:12px;"'; endif; ?>>

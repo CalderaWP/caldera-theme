@@ -339,7 +339,6 @@ add_filter( 'get_post_metadata', function( $return_value, $object_id, $meta_key 
                 return [ $prepared ];
             }
         }
-
     }
 
     return $return_value;
@@ -395,4 +394,23 @@ function caldera_theme_pagination(){
         'next_text' => __('Next Page', 'caldera_theme'),
         'before_page_number' => '<span class="meta-nav screen-reader-text">' . __('Page', 'caldera_theme') . ' </span>',
     ) ) );
+}
+
+
+function caldera_theme_fullwidth_header( $id = 0 ){
+    if( empty( $id ) && ! empty( get_queried_object_id() ) ){
+        $id = get_post_thumbnail_id( get_queried_object_id() );
+    }
+
+    if( ! empty( $id ) ){
+        $img = wp_get_attachment_image_src( $id, 'full' );
+
+        if( is_array( $img ) ){
+            $img_src = $img[0];
+        }
+    }
+
+    ob_start();
+    include __DIR__ . '/parts/header-full.php';
+    return ob_get_clean();
 }

@@ -1,20 +1,13 @@
 <?php
+use calderawp\theme\theme;
 global  $post;
 
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php
-		printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title( $post ) );
 
-	?>
-	<span class="image main">
-		<?php
-			// Post thumbnail.
-			echo caldera_theme_thumbnail( $post, 'large', 'img-responsive' );
-		?>
-		</span>
+	<?php echo caldera_theme_get_part( 'single', 'top', $post  ); ?>
 
 
 
@@ -34,7 +27,6 @@ global  $post;
 
 	<footer class="entry-footer">
 		<?php caldera_theme_entry_meta(); ?>
-		<?php edit_post_link( __( 'Edit', 'caldera_theme' ), '<span class="edit-link">', '</span>' ); ?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->

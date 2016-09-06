@@ -1,15 +1,9 @@
 <?php
+	global $post;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php
-		// Post thumbnail.
-		caldera_theme_post_thumbnail();
-	?>
-
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
+	<?php echo caldera_theme_get_part( 'single', 'top', $post  ); ?>
 
 	<div class="entry-content">
 		<?php the_content(); ?>
