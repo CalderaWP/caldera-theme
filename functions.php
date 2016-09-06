@@ -125,10 +125,12 @@ function caldera_theme_scripts() {
     wp_enqueue_style( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/bootstrap/3.0.2/css/bootstrap.min.css' )  );
     wp_enqueue_style( 'caldera_theme-font-awesome', caldera_theme_add_protocol( 'cdn.jsdelivr.net/fontawesome/4.3.0/css/font-awesome.min.css' ) );
     wp_enqueue_style( 'caldera_theme-style', caldera_theme_assets_uri() . '/css/style.css', [], CALDERA_THEME_VERSION );
-    wp_enqueue_style( 'caldera_theme-animiate', caldera_theme_assets_uri() . '/css/animate.css' );
+    wp_enqueue_style( 'caldera_theme-animate', caldera_theme_assets_uri() . '/css/animate.css' );
+
 
     wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/bootstrap/3.0.2/js/bootstrap.min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
-    wp_enqueue_script( 'caldera_theme-bootstrap', caldera_theme_add_protocol( 'cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
+    wp_enqueue_script( 'caldera_theme-easing', caldera_theme_add_protocol( 'cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
+    wp_enqueue_script( 'caldera_theme-jquery-color', caldera_theme_add_protocol( 'cdn.jsdelivr.net/jquery.color-animation/1.6.0/jquery.animate-colors-min.js' ), [ 'jquery' ], CALDERA_THEME_VERSION, true );
 
     /**
     // Load the Internet Explorer specific stylesheet.

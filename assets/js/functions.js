@@ -177,6 +177,9 @@
 			/** Extra animation for tiles view **/
 			$( '.tile-article' ).hover(
 				function() {
+					$( this ).animate({
+						backgroundColor: "#000"
+					}, 750 );
 					 $( this ).find( '.tile-article-title' ).fadeTo(500, 0, 'swing', function(){
 						$(this).css({
 							'visibility' : 'hidden',
@@ -199,6 +202,10 @@
 					}, 750 );
 
 				}, function() {
+					$( this ).animate({
+						backgroundColor: "#fff"
+					}, 750 );
+
 					$( this ).find( '.tile-article-title' ).fadeTo(500, 100, 'swing', function(){
 						$(this).css({
 							'visibility' : 'visible',
