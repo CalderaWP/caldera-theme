@@ -276,6 +276,21 @@ add_filter( 'get_search_form', 'caldera_theme_search_form_modify' );
  */
 require get_template_directory() . '/inc/template-tags.php';
 
+/**
+ * Bundle logic functions
+ *
+ * Probably move to child theme!
+ *
+ */
+require get_template_directory() . '/inc/bundle-logic.php';
+
+
+/**
+ * Pricing table functions
+ */
+require get_template_directory() . '/inc/pricing-tables.php';
+
+
 
 function caldera_theme_get_part( $first, $second = null, $post = null ){
     if( null == $post ){
@@ -302,15 +317,29 @@ function caldera_theme_tile( $post, $style_count ){
 }
 
 add_filter( 'get_post_metadata', function( $return_value, $object_id, $meta_key ){
+    if( is_admin() ){
+        return $return_value;
+    }
+
     if( FOOGALLERY_META_ATTACHMENTS == $meta_key ){
         global $post;
         if( ! empty( $post  ) && 'download' == $post->post_type ){
             $meta = get_post_meta( $post->ID, theme::PRODUCT_IMAGES_KEY, true );
-            if( is_array( $meta )  && isset( $meta[0])){
-                $meta[0] = array_filter( array_keys( $meta[0] ), 'absint' );
-                $return_value = $meta;
+            if( is_array( $meta ) ){
+                $prepared = [];
+                foreach( $meta as $i => $url ){
+
+                    if ( 'attachment' === get_post_type( $i ) ) {
+                        $prepared[] = $i;
+
+                    }
+                }
+
+
+                return [ $prepared ];
             }
         }
+
     }
 
     return $return_value;

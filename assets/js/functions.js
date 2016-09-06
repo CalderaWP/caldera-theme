@@ -174,7 +174,7 @@
 			setTimeout( resizeAndScroll, 100 * i );
 		}
 
-
+			/** Extra animation for tiles view **/
 			$( '.tile-article' ).hover(
 				function() {
 					 $( this ).find( '.tile-article-title' ).fadeTo(500, 0, 'swing', function(){
@@ -222,6 +222,24 @@
 					$( this ).find( '.image' ).fadeTo(500, 1, 'swing' );
 				}
 			);
+
+		/** Price table logic **/
+		//switch tables
+		var $single = $( '.single-product-price-table, #see-bundle-prices' );
+		var $bundles = $( '.bundle-price-table, #prices-options-row' );
+
+		$( document ).on( 'click', '.see-single-prices', function(e){
+			e.preventDefault();
+			$single.show().attr( 'aria-hidden', false ).css( 'visibility', 'visible' );
+			$bundles.hide().attr( 'aria-hidden', true ).css( 'visibility', 'hidden' );
+		} );
+
+		$( document ).on( 'click', '#see-bundle-prices', function(e){
+			e.preventDefault();
+			$bundles.show().attr( 'aria-hidden', false ).css( 'visibility', 'visible' );
+			$single.hide().attr( 'aria-hidden', true ).css( 'visibility', 'hidden' );
+
+		} );
 
 	} );
 
