@@ -416,3 +416,86 @@ function caldera_theme_fullwidth_header( $id = 0 ){
     include __DIR__ . '/parts/header-full.php';
     return ob_get_clean();
 }
+
+function caldera_theme_docs_search_form(){
+    $form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
+				<label>
+					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
+					<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+				</label>
+				<input type="hidden" name="doc-search" value="1" />
+				<input type="submit" class="search-submit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
+			</form>';
+    return $form;
+}
+
+/**
+ * @param WP_Post $post
+ *
+ * @return string
+ */
+function caldera_theme_get_excerpt(  $post ){
+    if( ! empty( $post->post_excerpt ) ){
+        $excerpt = $post->post_excerpt;
+    }else{
+        $excerpt = $post->post_content;
+    }
+
+    return caldera_theme_limit_text( $excerpt, 55 );
+
+}
+
+function caldera_theme_limit_text($text, $limit){
+    if (str_word_count($text, 0) > $limit) {
+        $words = str_word_count($text, 2);
+        $pos = array_keys($words);
+        $text = substr($text, 0, $pos[$limit]) . '...';
+    }
+    return $text;
+}
+
+function caldera_theme_recent_posts( array $args = [] ){
+    return caldera_theme_mini_loop( 'caldera-theme-recent-posts', $args );
+}
+
+function caldera_theme_popular_addons(){
+    return caldera_theme_mini_loop( 'caldera-theme-popular-addons', [
+        'post__in' => [ 552, 561, 607, 5070, 565 ],
+        'post_type' => [ 'download' ],
+
+    ]);
+}
+
+/**
+ * @param array $args
+ * @return string
+ */
+function caldera_theme_mini_loop( $wrap_class, array $args = [] ){
+    if (!isset($args['posts_per_page'])) {
+        $args['posts_per_page'] = 5;
+    }
+    $query = new WP_Query($args);
+    $out = [];
+    $out[] = sprintf( '<div class="%s">', esc_attr($wrap_class));
+    while( $query->have_posts() ) {
+        $out[] = caldera_theme_get_part('content', 'mini', $query->the_post() );
+    }
+    $out[] = '</div>';
+    wp_reset_query();
+
+    return implode("\n\n", $out);
+}
+
+
+add_action('pre_get_posts', function( WP_Query $query ) {
+    if ( ! is_admin() && $query->is_main_query()  ) {
+
+        if ( $query->is_search ) {
+            if ( isset( $_GET[ 'doc-search' ] ) && $_GET[ 'doc-search' ] ) {
+                $query->set('post_type', array( 'doc'));
+            } else {
+                $query->set( 'post_type', array('post', 'doc', 'download' ) );
+            }
+        }
+    }
+});

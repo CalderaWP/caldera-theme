@@ -22,11 +22,10 @@ if ( !$full_width ) {
 }
 
 ?>
-<span class="image main">
     <?php
+
         if (! $full_width) {
-            echo caldera_theme_thumbnail( $post, 'large', 'img-responsive');
+            printf( '<span class="image main">%s</span>', caldera_theme_thumbnail( $post, 'img-responsive', 'full' ) );
         }
 
     ?>
-</span>

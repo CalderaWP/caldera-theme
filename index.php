@@ -5,15 +5,17 @@ get_header(); ?>
 	<div id="primary" class="container content-area">
 
 		<?php
-
+			$show_sidebar = false;
 			if( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
 				$full_width = true;
+
 			}else{
 				$full_width = false;
 			}
 
 			$title = $content = '';
 			if( is_archive() ) {
+
 				$title = get_the_archive_title() ;
 				$content = sprintf('<p class="taxonomy-description">%s</p>', get_the_archive_description());
 			}elseif( is_singular() ){
@@ -21,6 +23,10 @@ get_header(); ?>
 				$partial = 'single';
 				if( 'download' == get_post_type( $post ) ) {
 					$partial = 'download';
+				}else{
+					if ( 'page' != get_post_type() && ! $full_width ) {
+						$show_sidebar = true;
+					}
 				}
 				$content = caldera_theme_get_part( 'content', $partial, get_post() );
 			}else{
@@ -36,7 +42,7 @@ get_header(); ?>
 			<section id="main-contain"><!-- start main-contain -->
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-sm-12 <?php if( $show_sidebar ) : echo 'col-md-9'; endif; ?>">
 							<?php
 								if ( ! empty( $title ) ) {
 									$extra = '';
@@ -51,6 +57,9 @@ get_header(); ?>
 								echo $content;
 							?>
 						</div>
+						<?php if( $show_sidebar ) {
+							get_sidebar();
+						}  ?>
 					</div>
 				</div>
 			</section><!--  -->

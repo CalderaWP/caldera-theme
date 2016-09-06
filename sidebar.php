@@ -1,40 +1,63 @@
 <?php
 
-if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) || is_active_sidebar( 'sidebar-1' )  ) : ?>
-	<div id="secondary" class="secondary">
+?>
+	<div id="secondary" class="secondary col-sm-12 col-md-3">
 
-		<?php if ( has_nav_menu( 'primary' ) ) : ?>
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<?php
-					// Primary navigation menu.
-					wp_nav_menu( array(
-						'menu_class'     => 'nav-menu',
-						'theme_location' => 'primary',
-					) );
-				?>
-			</nav><!-- .main-navigation -->
+		<aside id="caldera-forms-widget" class="widget well row">
+			<div class="col-sm-12">
+				<a href="#">
+					<img src="<?php echo esc_url( caldera_theme_add_protocol( 'd1dy2qw4671tuy.cloudfront.net/images/cf-banner.png' ) ); ?>" class="img-responsive"  alt="Caldera Forms Banner">
+				</a>
+			</div>
+			<div class="col-sm-12">
+				<p class="text-center" style="margin-top:0;">
+					<?php esc_html_e( 'A different kind of form builder' , 'caldera_theme' ); ?>
+				</p>
+				<a href="#" class="btn btn-primary btn-orange" style="margin-top: 0;background-color: #ff7e30;">
+					<?php esc_html_e( 'Learn More' , 'caldera_theme' ); ?>
+				</a>
+			</div>
+		</aside>
+
+		<aside id="doc-search-widget" class="widget well row">
+			<div class="col-sm-12">
+				<h3 class="widget-title">
+					<?php esc_html_e( 'Popular Caldera Forms Add-ons' , 'caldera_theme' ); ?>
+				</h3>
+				<?php echo caldera_theme_popular_addons(); ?>
+			</div>
+		</aside>
+
+		<aside id="doc-search-widget" class="widget well row">
+			<div class="col-sm-12">
+				<h3 class="widget-title">
+					<?php esc_html_e( 'Search Our Documentation' , 'caldera_theme' ); ?>
+				</h3>
+				<?php echo caldera_theme_docs_search_form(); ?>
+			</div>
+		</aside>
+
+		<?php if( is_single() || is_home() ) : ?>
+			<aside id="recent-posts-widget" class="widget well row">
+				<div class="col-sm-12">
+					<h3 class="widget-title">
+						<?php esc_html_e( 'Recent Posts' , 'caldera_theme' ); ?>
+					</h3>
+					<?php echo caldera_theme_recent_posts(); ?>
+				</div>
+			</aside>
 		<?php endif; ?>
 
-		<?php if ( has_nav_menu( 'social' ) ) : ?>
-			<nav id="social-navigation" class="social-navigation" role="navigation">
-				<?php
-					// Social links navigation menu.
-					wp_nav_menu( array(
-						'theme_location' => 'social',
-						'depth'          => 1,
-						'link_before'    => '<span class="screen-reader-text">',
-						'link_after'     => '</span>',
-					) );
-				?>
-			</nav><!-- .social-navigation -->
-		<?php endif; ?>
+		<aside id="doc-search-widget" class="widget well row">
+			<div class="col-sm-12">
+				<h3 class="widget-title">
+					<?php esc_html_e( 'Subscribe To Our Blog' , 'caldera_theme' ); ?>
+				</h3>
+				<?php echo Caldera_Forms::render_form( 'CF56f4b1c725394' ); ?>
+			</div>
+		</aside>
 
-		<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-			<div id="widget-area" class="widget-area" role="complementary">
-				<?php dynamic_sidebar( 'sidebar-1' ); ?>
-			</div><!-- .widget-area -->
-		<?php endif; ?>
+
 
 	</div><!-- .secondary -->
 
-<?php endif; ?>
