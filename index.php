@@ -42,7 +42,7 @@ get_header(); ?>
 			<section id="main-contain"><!-- start main-contain -->
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-12 <?php if( $show_sidebar ) : echo 'col-md-9'; endif; ?>">
+						<div class="col-sm-12">
 							<?php
 								if ( ! empty( $title ) ) {
 									$extra = '';
@@ -54,12 +54,21 @@ get_header(); ?>
 									$extra = '';
 									printf('<h1 class="%s" %s>%s</h1>', esc_attr( $class ), $extra, $title );
 								}
-								echo $content;
+
 							?>
 						</div>
-						<?php if( $show_sidebar ) {
+					</div>
+					<div class="row">
+						<div class="col-sm-12 <?php if( $show_sidebar ) : echo 'col-md-9'; endif; ?>">
+
+
+						<?php
+							echo $content;
+							echo '</div>';
+							if( $show_sidebar ) {
 							get_sidebar();
 						}  ?>
+						</div>
 					</div>
 				</div>
 			</section><!--  -->
