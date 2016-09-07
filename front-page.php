@@ -159,8 +159,8 @@ $emebed_pattern = '<div class="col-sm-6 tweet-embed-wrap">%s</div>';
     </div>
     <div class="row happy-tweets">
         <?php
-        printf( $emebed_pattern, caldera_theme_oembed_get( $tweets[7] ) );
-        printf( $emebed_pattern, caldera_theme_oembed_get( $tweets[5] ) );
+     //   printf( $emebed_pattern, caldera_theme_oembed_get( $tweets[7] ) );
+      //  printf( $emebed_pattern, caldera_theme_oembed_get( $tweets[5] ) );
         ?>
     </div>
 
