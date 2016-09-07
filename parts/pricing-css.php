@@ -160,5 +160,15 @@
         margin-top: 12px;
     }
 
+    button.cf-bundle-modal-open {
+        background-color: initial;
+        color: #7e943d;
+    }
+
+    button.cf-bundle-modal-open:hover {
+        color: #4b4b4b ;
+    }
+
+
 
 </style>

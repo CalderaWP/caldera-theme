@@ -298,9 +298,23 @@ function caldera_theme_get_part( $first, $second = null, $post = null ){
     if( null == $post ){
         $post = get_post();
     }
-    ob_start();
-    get_template_part( 'parts/' . $first, $second );
-    return ob_get_clean();
+
+    $name = 'parts/' . $first;
+    if( $second ){
+        $name .= '-' . $second;
+    }
+    $name .= '.php';
+
+
+    $path = locate_template( $name );
+    if( file_exists( $path ) ) {
+        ob_start();
+        include  $path;
+        return ob_get_clean();
+    }else{
+        var_dump( $name );
+    }
+
 }
 
 function caldera_theme_thumbnail( $post, $classes = '', $size = 'post-thumbnail' ){
@@ -424,7 +438,7 @@ function caldera_theme_docs_search_form(){
 					<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
 				</label>
 				<input type="hidden" name="doc-search" value="1" />
-				<input type="submit" class="search-submit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
+				<input type="submit" class="btn-green search-submit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
 			</form>';
     return $form;
 }
@@ -518,4 +532,12 @@ function caldera_theme_oembed_get( $url ){
     return $embed;
 
 
+}
+
+
+add_filter('get_image_tag_class', 'caldera_theme_image_class_filter');
+function caldera_theme_image_class_filter( $classes ){
+    $classes .= ' img-responsive';
+
+    return $classes;
 }

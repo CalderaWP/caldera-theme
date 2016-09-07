@@ -249,6 +249,8 @@
 
 		} );
 
+		/** Add .img-responsive to all images **/
+		$( 'img' ).addClass( 'img-responsive' );
 	} );
 
 } )( jQuery );

@@ -29,7 +29,7 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
                 <?php
                 $pattern = '<li class="list-group-item"><i class="icon-ok text-success"></i> %s</li>';
                 foreach ( $benefits as $benefit ){
-                    printf( $pattern, esc_html(  $benefit ) );
+                    printf( $pattern, $benefit );
                 }
 
                 ?>
@@ -94,10 +94,13 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
         $bundle = get_post( $bundle_id );
         $price = edd_get_download_price( $bundle_id );
         $contents = edd_get_bundled_products( $bundle_id );
-        $contents_count = count( $contents );
+        $contents_count = count( $contents ) - 1;
         $name = $bundle->post_title;
+
+        $modal_button_text =  sprintf( __( 'Includes %d Caldera Forms Add-ons', 'caldera_theme' ), $contents_count );
+        $modal_button = caldera_theme_print_bundles_modal( $bundle_id, $modal_button_text );
         $benefits = [
-            sprintf( 'Includes %d Caldera Forms Add-ons', $contents_count ),
+            $modal_button
         ];
 
         if( 20521 == $bundle_id ){
