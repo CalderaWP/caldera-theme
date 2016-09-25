@@ -32,19 +32,73 @@
 								<span class="icon-bar"></span>
 							</button>
 							<a href="#" class="logo navbar-brand">
-								<span class="symbol"><img src="<?php echo esc_url( caldera_theme_globe_logo( 'sm' ) ); ?>" class="img-responsive" alt=""></span>
-								<span class="title">Caldera</span>
+								<span class="symbol"><img src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/cf-name-banner-trans-cropped-md.png' ); ?>" class="img-responsive" alt="Caldera Forms Banner with globe logo and name"></span>
+								<span class="title screen-reader-text">Caldera Forms</span>
 							</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
+
 							<ul class="nav navbar-nav navbar-right">
-								<li class="active"><a href="index.html">Home</a></li>
-								<li><a href="generic.html">Ipsum veroeros</a></li>
-								<li><a href="generic.html">Tempus etiam</a></li>
-								<li><a href="generic.html">Consequat dolor</a></li>
-								<li><a href="elements.html">Elements</a></li>
+
+								<li class="dropdown">
+									<a href="<?php echo esc_url( home_url() ); ?>" id="menu-item-home" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caldera Forms</a>
+									<ul class="dropdown-menu">
+										<li><a href="https://WordPress.org/plugins/caldera-forms" target="_blank">Get Started Free</a></li>
+										<li><a href="<?php echo esc_url( get_permalink( 23339 ) ); ?>">Save With Bundles</a></li>
+										<li><a href="<?php echo esc_url( get_permalink( 712 ) ); ?>">Add-ons</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="https://Caldera.Space">Form To PDF</a></li>
+										<li><a href="http://form.works">FormWorks</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>" id="menu-item-getting-started" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Getting Started</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Getting Started Guide</a></li>
+										<li><a href="https://www.youtube.com/playlist?list=PLgeaHmX3MoiuXOhRlDdYn7k0RcL4afLzQ">YouTube</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="<?php echo esc_url( get_permalink( 1011 ) ); ?>" id="menu-item-1011" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support</a>
+									<ul class="dropdown-menu">
+										<?php
+											echo caldera_theme_menu_item( 1011 );
+											echo caldera_theme_menu_item( 8128 );
+										?>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="<?php echo esc_url( get_permalink( 712 ) ); ?>" id="menu-item-712" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add-ons</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="<?php echo esc_url( add_query_arg( 'type', 'payment', get_permalink( 712 ) ) ); ?>">
+												Payments
+											</a>
+										</li>
+										<li>
+											<a href="<?php echo esc_url( add_query_arg( 'type', 'email', get_permalink( 712 ) ) ); ?>">
+												Email
+											</a>
+										</li>
+										<li>
+											<a href="<?php echo esc_url( add_query_arg( 'type', 'tools', get_permalink( 712 ) ) ); ?>">
+												Tools
+											</a>
+										</li>
+										<li>
+											<a href="<?php echo esc_url( add_query_arg( 'type', 'free', get_permalink( 712 ) ) ); ?>">
+												Free
+											</a>
+										</li>
+
+									</ul>
+								</li>
+
+
+
+
 							</ul>
 						</div><!-- /.navbar-collapse -->
 					</nav>
@@ -56,5 +110,7 @@
 	if( is_front_page() || theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
 		echo caldera_theme_fullwidth_header();
 	}
+
+	/**add-ons >**/
 ?>
 

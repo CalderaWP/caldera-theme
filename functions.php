@@ -157,6 +157,16 @@ function caldera_theme_scripts() {
         'expand'   => '<span class="screen-reader-text">' . __( 'expand child menu', 'caldera_theme' ) . '</span>',
         'collapse' => '<span class="screen-reader-text">' . __( 'collapse child menu', 'caldera_theme' ) . '</span>',
     ) );
+
+    $active_top = 0;
+    if( is_front_page() ){
+        $active_top = 'menu-item-home';
+    }elseif ( is_singular()  ){
+        $active_top = 'menu-item-' .get_queried_object_id();
+    }
+    wp_localize_script( 'caldera_theme-script', 'CALDERA_THEME', [
+        'activeTop' => $active_top
+    ] );
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
 
@@ -540,4 +550,24 @@ function caldera_theme_image_class_filter( $classes ){
     $classes .= ' img-responsive';
 
     return $classes;
+}
+
+function caldera_theme_menu_item( $post, $title = '' ){
+    if( is_numeric( $post ) ){
+        $post = get_post( $post );
+    }
+    if( empty( $title ) ){
+        $title = $post->post_title;
+    }
+
+
+    $attrs = 'class="menu-link"';
+
+    return sprintf( '<li class="menu-item" id="%s"><a href="%s" title="%s" %s>%s</a></li>',
+        esc_attr( 'menu-item-' . $post->ID ),
+        esc_url( get_permalink( $post->ID ) ),
+        esc_attr(  $title ),
+        $attrs,
+        wp_kses_post( $title )
+    );
 }

@@ -251,6 +251,9 @@
 
 		/** Add .img-responsive to all images **/
 		$( 'img' ).addClass( 'img-responsive' );
+
+		/**menu active class */
+		$( '#' + CALDERA_THEME.activeTop ).addClass( 'active' );
 	} );
 
 } )( jQuery );
