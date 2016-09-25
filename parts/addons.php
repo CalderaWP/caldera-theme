@@ -78,7 +78,7 @@ if( ! defined( 'ABSPATH' ) ){
 
                     <div class="entry-header" role="heading">
                         <h2 class="entry-title">
-                            <a href="{{link}}" rel="bookmark">
+                            <a ng-href="{{addon.link}}"  rel="bookmark">
                                 {{addon.name}}
                             </a>
                         </h2>

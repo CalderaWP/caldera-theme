@@ -77,13 +77,6 @@ get_header(); ?>
 		<?php
 
 		if ( have_posts() ) : ?>
-
-			<?php if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-			<?php endif; ?>
-
 			<?php
 				if( theme::get_instance()->get_box_options()->use_boxes() ){
 					echo caldera_theme_get_part( 'boxes' );
@@ -91,9 +84,7 @@ get_header(); ?>
 
 					while (have_posts()) {
 						the_post();
-
-
-						get_template_part('content', get_post_type());
+						echo '<div class="container">' . caldera_theme_get_part('content',  'nonbox', get_post( get_the_ID()) ) . '</div>';
 
 					}
 
@@ -104,11 +95,11 @@ get_header(); ?>
 
 		// If no content, include the "No posts found" template.
 		else :
-			get_template_part( 'content', 'none' );
+            echo caldera_theme_get_part( 'content', 'none' );
 
 		endif;
 		?>
 
-	</div><!-- .content-area -->
+	</div><!-- .content-area #primary-->
 
 <?php get_footer(); ?>

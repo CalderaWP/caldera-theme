@@ -604,3 +604,40 @@ add_filter( 'the_content', function( $content) {
 
     return $content;
 });
+
+add_filter( 'the_content', function( $content){
+    if( is_page( 8128) ){
+        ob_start();
+        include  __DIR__ . '/parts/search-live.php';
+
+        $content = ob_get_clean();
+        $content .= '<h2>Documentation By Category</h2>';
+        $content .= '<ul class="list-group">';
+        $pattern = '<li class="list-group-item"><a href="%s">%s</a></li>';
+        foreach( [
+            141, //caldera-forms
+                     178, //field types
+                     180, //add-ons
+                     118, //screencasts
+                     170, //filters
+                     171, //actions
+
+            ] as $term_id ){
+                $term = get_term( $term_id );
+                $content .= sprintf( $pattern, esc_url( get_term_link( $term_id ) ), $term->name );
+        }
+        $content .= '</li>';
+    }
+
+    return $content;
+
+});
+
+/**
+ * In category archives show doc and post post types
+ */
+add_action( 'pre_get_posts', function( WP_Query $query ){
+    if( $query->is_category() ){
+        $query->set( 'post_type', [ 'doc', 'post' ] );
+    }
+});

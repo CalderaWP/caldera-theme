@@ -26,6 +26,6 @@ global $post;
 
 
 	<footer class="entry-footer">
-		</footer><!-- .entry-footer -->
+    </footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
