@@ -167,8 +167,27 @@ function caldera_theme_scripts() {
     wp_localize_script( 'caldera_theme-script', 'CALDERA_THEME', [
         'activeTop' => $active_top
     ] );
+
+    if( is_page( 'caldera-forms-add-ons' ) ){
+        caldera_theme_load_angular();
+
+        wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
+
+/**
+ * Load AngularJS
+ */
+function caldera_theme_load_angular(){
+    wp_enqueue_script('angular', caldera_theme_add_protocol('ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js'), ['jquery'], '1.5.8', true);
+    wp_enqueue_script('angular-resource', caldera_theme_add_protocol('cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.min.js'), ['angular'], '1.5.8', true);
+    wp_enqueue_script('angular-animate', caldera_theme_add_protocol('ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js'), ['angular'], '1.5.8', true);
+    wp_enqueue_script('angular-ui-router', caldera_theme_add_protocol('cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js'), ['angular', 'angular-resource', 'jquery'], '1.5.8', true);
+    wp_enqueue_script('angular-sanitize', caldera_theme_add_protocol('ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js'), ['angular'], '1.5.8', true);
+}
+
+
 
 /**
  * Get URL for assets DIR via CDN, or local
@@ -571,3 +590,17 @@ function caldera_theme_menu_item( $post, $title = '' ){
         wp_kses_post( $title )
     );
 }
+
+/**
+ * On addons page get HTML for Angular App
+ */
+add_filter( 'the_content', function( $content) {
+    if( is_page( 'caldera-forms-add-ons' ) ){
+        ob_start();
+        include  __DIR__ . '/parts/addons.php';
+
+        $content = ob_get_clean();
+    }
+
+    return $content;
+});

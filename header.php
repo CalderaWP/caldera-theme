@@ -31,16 +31,19 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a href="#" class="logo navbar-brand">
-								<span class="symbol"><img src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/cf-name-banner-trans-cropped-md.png' ); ?>" class="img-responsive" alt="Caldera Forms Banner with globe logo and name"></span>
-								<span class="title screen-reader-text">Caldera Forms</span>
-							</a>
+
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
 
-							<ul class="nav navbar-nav navbar-right">
+							<ul class="nav navbar-nav navbar-left">
+                                <li><a href="/" class="logo navbar-brand">
+                                    <span class=""><img style="height: 20px;width: auto;" src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/cf-name-banner-green-cropped-sm.png' ); ?>" class="" alt="Caldera Forms Banner with globe logo and name"></span>
+                                    <span class="title screen-reader-text">Caldera Forms</span>
+                                </a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
 
 								<li class="dropdown">
 									<a href="<?php echo esc_url( home_url() ); ?>" id="menu-item-home" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caldera Forms</a>
@@ -73,22 +76,22 @@
 									<a href="<?php echo esc_url( get_permalink( 712 ) ); ?>" id="menu-item-712" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add-ons</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="<?php echo esc_url( add_query_arg( 'type', 'payment', get_permalink( 712 ) ) ); ?>">
-												Payments
+											<a href="<?php echo esc_url( get_permalink( 712 ) .'/#/payment' ); ?>">
+												Payment Processors
 											</a>
 										</li>
 										<li>
-											<a href="<?php echo esc_url( add_query_arg( 'type', 'email', get_permalink( 712 ) ) ); ?>">
-												Email
+                                            <a href="<?php echo esc_url( get_permalink( 712 ) .'/#/email' ); ?>">
+												Email Marketing
 											</a>
 										</li>
 										<li>
-											<a href="<?php echo esc_url( add_query_arg( 'type', 'tools', get_permalink( 712 ) ) ); ?>">
-												Tools
+                                            <a href="<?php echo esc_url( get_permalink( 712 ) .'/#/tools' ); ?>">
+                                            Tools
 											</a>
 										</li>
 										<li>
-											<a href="<?php echo esc_url( add_query_arg( 'type', 'free', get_permalink( 712 ) ) ); ?>">
+                                            <a href="<?php echo esc_url( get_permalink( 712 ) .'/#/free' ); ?>">
 												Free
 											</a>
 										</li>
