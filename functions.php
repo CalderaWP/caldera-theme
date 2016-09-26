@@ -599,7 +599,7 @@ add_filter( 'the_content', function( $content) {
         ob_start();
         include  __DIR__ . '/parts/addons.php';
 
-        $content = ob_get_clean();
+        $content .= ob_get_clean();
     }
 
     return $content;
