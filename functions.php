@@ -443,6 +443,11 @@ function caldera_theme_pagination(){
 
 
 function caldera_theme_fullwidth_header( $id = 0 ){
+	$show = apply_filters( 'caldera_theme_fullwidth_header_show', true );
+	if( false == $show ){
+		return '';
+	}
+
     if( empty( $id ) && ! empty( get_queried_object_id() ) ){
         $id = get_post_thumbnail_id( get_queried_object_id() );
     }
