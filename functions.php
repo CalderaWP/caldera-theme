@@ -172,6 +172,9 @@ function caldera_theme_scripts() {
         caldera_theme_load_angular();
 
         wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
+	    wp_localize_script( 'caldera_theme-addons', 'CFADDONS', [
+	    	'api' => esc_url_raw( rest_url( 'calderawp_api/v2/products/cf-addons' ) )
+	    ]);
     }
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
