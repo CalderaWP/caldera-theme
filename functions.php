@@ -171,7 +171,7 @@ function caldera_theme_scripts() {
     if( is_page( 'caldera-forms-add-ons' ) ){
         caldera_theme_load_angular();
 
-        wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.min.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
+        wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
     }
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
@@ -604,7 +604,7 @@ add_filter( 'the_content', function( $content) {
         ob_start();
         include  __DIR__ . '/parts/addons.php';
 
-        $content .= ob_get_clean();
+        $content = ob_get_clean();
     }
 
     return $content;
@@ -646,3 +646,28 @@ add_action( 'pre_get_posts', function( WP_Query $query ){
         $query->set( 'post_type', [ 'doc', 'post' ] );
     }
 });
+
+/**
+ * Use alt thumbnail if possible
+ */
+add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnial',  10, 4 );
+function caldera_theme_alt_thumbnial( $value, $object_id, $meta_key, $single ){
+	if( ! is_admin() &&  '_thumbnail_id' == $meta_key ){
+		if( $object_id !== get_the_ID() ){
+
+			remove_filter( 'get_post_metadata', __FUNCTION__ );
+			$alt = get_post_meta( $object_id, theme::NO_COLOR_IMAGE . '_id', true );
+			add_filter( 'get_post_metadata', __FUNCTION__, 10, 4 );
+			if( ! empty( $alt ) ){
+				if( $single ){
+					return $alt;
+				}else{
+					return [ $alt ];
+				}
+
+			}
+		}
+	}
+
+	return $value;
+}
