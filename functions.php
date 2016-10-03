@@ -171,7 +171,7 @@ function caldera_theme_scripts() {
     if( is_page( 'caldera-forms-add-ons' ) ){
         caldera_theme_load_angular();
 
-        wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
+        wp_enqueue_script( 'caldera_theme-addons', caldera_theme_assets_uri() . '/js/addons.min.js', [ 'angular', 'jquery' ], CALDERA_THEME_VERSION, true );
     }
 }
 add_action( 'wp_enqueue_scripts', 'caldera_theme_scripts' );
