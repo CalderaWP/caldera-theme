@@ -111,8 +111,12 @@
 <?php
 	endif;
 
-	if( ( apply_filters( 'caldera_theme_show_full_width_header', true ) ) && ( is_front_page() || ( is_object( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) && theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) ) ) {
-		echo caldera_theme_fullwidth_header();
+	if ( ! is_front_page() ) {
+		if ( is_object( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) && theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
+			echo caldera_theme_fullwidth_header();
+		}
+	}else{
+		do_action( 'caldera_theme_front_page_below_menu' );
 	}
 
 	/**add-ons >**/
