@@ -310,14 +310,6 @@ add_filter( 'get_search_form', 'caldera_theme_search_form_modify' );
  */
 require get_template_directory() . '/inc/template-tags.php';
 
-/**
- * Bundle logic functions
- *
- * Probably move to child theme!
- *
- */
-require get_template_directory() . '/inc/bundle-logic.php';
-
 
 /**
  * Pricing table functions
@@ -468,17 +460,6 @@ function caldera_theme_fullwidth_header( $id = 0 ){
     return ob_get_clean();
 }
 
-function caldera_theme_docs_search_form(){
-    $form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
-				<label>
-					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
-					<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
-				</label>
-				<input type="hidden" name="doc-search" value="1" />
-				<input type="submit" class="btn-green search-submit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
-			</form>';
-    return $form;
-}
 
 /**
  * @param WP_Post $post
@@ -509,13 +490,7 @@ function caldera_theme_recent_posts( array $args = [] ){
     return caldera_theme_mini_loop( 'caldera-theme-recent-posts', $args );
 }
 
-function caldera_theme_popular_addons(){
-    return caldera_theme_mini_loop( 'caldera-theme-popular-addons', [
-        'post__in' => [ 552, 561, 607, 5070, 565 ],
-        'post_type' => [ 'download' ],
 
-    ]);
-}
 
 /**
  * @param array $args
@@ -537,19 +512,6 @@ function caldera_theme_mini_loop( $wrap_class, array $args = [] ){
     return implode("\n\n", $out);
 }
 
-
-add_action('pre_get_posts', function( WP_Query $query ) {
-    if ( ! is_admin() && $query->is_main_query()  ) {
-
-        if ( $query->is_search ) {
-            if ( isset( $_GET[ 'doc-search' ] ) && $_GET[ 'doc-search' ] ) {
-                $query->set('post_type', array( 'doc'));
-            } else {
-                $query->set( 'post_type', array('post', 'doc', 'download' ) );
-            }
-        }
-    }
-});
 
 /**
  * Caching wrapper for wp_oembed_get()
@@ -613,42 +575,8 @@ add_filter( 'the_content', function( $content) {
     return $content;
 });
 
-add_filter( 'the_content', function( $content){
-    if( is_page( 8128) ){
-        ob_start();
-        include  __DIR__ . '/parts/search-live.php';
 
-        $content = ob_get_clean();
-        $content .= '<h2>Documentation By Category</h2>';
-        $content .= '<ul class="list-group">';
-        $pattern = '<li class="list-group-item"><a href="%s">%s</a></li>';
-        foreach( [
-            141, //caldera-forms
-                     178, //field types
-                     180, //add-ons
-                     118, //screencasts
-                     170, //filters
-                     171, //actions
 
-            ] as $term_id ){
-                $term = get_term( $term_id );
-                $content .= sprintf( $pattern, esc_url( get_term_link( $term_id ) ), $term->name );
-        }
-        $content .= '</li>';
-    }
-
-    return $content;
-
-});
-
-/**
- * In category archives show doc and post post types
- */
-add_action( 'pre_get_posts', function( WP_Query $query ){
-    if( $query->is_category() ){
-        $query->set( 'post_type', [ 'doc', 'post' ] );
-    }
-});
 
 /**
  * Use alt thumbnail if possible
