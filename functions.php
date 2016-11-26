@@ -581,8 +581,8 @@ add_filter( 'the_content', function( $content) {
 /**
  * Use alt thumbnail if possible
  */
-add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnial',  10, 4 );
-function caldera_theme_alt_thumbnial( $value, $object_id, $meta_key, $single ){
+add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail',  10, 4 );
+function caldera_theme_alt_thumbnail( $value, $object_id, $meta_key, $single ){
 	if( ! is_admin() &&  '_thumbnail_id' == $meta_key ){
 		if( $object_id !== get_the_ID() ){
 
@@ -602,3 +602,4 @@ function caldera_theme_alt_thumbnial( $value, $object_id, $meta_key, $single ){
 
 	return $value;
 }
+

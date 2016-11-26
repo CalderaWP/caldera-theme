@@ -59,6 +59,8 @@ add_filter( 'the_content', function( $content ){
 
 
 function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '' ){
+   remove_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail', 10 );
+
     caldera_theme_pricing_style_css();
     if (empty($bundles)) {
         $bundles = caldera_theme_bundle_ids();
@@ -141,6 +143,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
     }
 
     $out[] = '</div>';
+    add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail',  10, 4 );
 
     return implode( "\n\n", $out );
 
