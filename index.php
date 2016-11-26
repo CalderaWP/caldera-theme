@@ -80,14 +80,15 @@ get_header(); ?>
 
 		<?php
 
-		if ( ( is_home() && is_archive() ) && have_posts() ) : ?>
+		if ( ( is_home() || is_archive() ) && have_posts() ) : ?>
 			<?php
-				if( theme::get_instance()->get_box_options()->use_boxes() ){
+				if( ! is_archive() && theme::get_instance()->get_box_options()->use_boxes() ){
 					echo caldera_theme_get_part( 'boxes' );
 				}else{
 
-					while (have_posts()) {
+					while ( have_posts()) {
 						the_post();
+						$__post = get_post( get_the_ID());
 						echo '<div class="container">' . caldera_theme_get_part('content',  'nonbox', get_post( get_the_ID()) ) . '</div>';
 
 					}

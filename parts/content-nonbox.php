@@ -1,8 +1,11 @@
 <?php
-global $post;
+if( ! isset( $post ) ){
+	global $post;
+}
+
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'row not-box'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'row not-box well'); ?>>
 
 
 	<div class="entry-header" role="heading">
@@ -14,11 +17,11 @@ global $post;
 			endif;
 		?>
 	</div><!-- .entry-header -->
-	<?php printf( '<a href="%s">%s</a>', esc_url( get_permalink() ), caldera_theme_thumbnail( $post, 'large', 'img-responsive') ); ?>
+	<?php printf( '<a href="%s">%s</a>', esc_url( get_permalink( $post ) ), caldera_theme_thumbnail( $post, 'large', 'img-responsive') ); ?>
 	<div class="entry-content">
 		<?php
-			echo caldera_theme_get_excerpt( get_post() );
-			printf( '<a href="%s" class="btn btn-green btn-block btn-readmore" rel="bookmark" title="View %s">%s</a>', esc_url( get_permalink() ), esc_attr( 'View ' . $post->post_title ), esc_html__( 'Read More', 'caldera_theme' )  );
+			echo caldera_theme_get_excerpt( $post );
+			printf( '<a href="%s" class="btn btn-green btn-block btn-readmore" rel="bookmark" title="View %s">%s</a>', esc_url( get_permalink( $post ) ), esc_attr( 'View ' . $post->post_title ), esc_html__( 'Read More', 'caldera_theme' )  );
 
 		?>
 	</div><!-- .entry-content -->
