@@ -24,8 +24,12 @@ get_header(); ?>
 				if( 'download' == get_post_type( $post ) ) {
 					$partial = 'download';
 				}else{
-					if ( 'page' != get_post_type() && ! $full_width ) {
+					if( is_page() ){
+						$partial = 'page';
+					}
+					if ( ! is_page() && ! $full_width ) {
 						$show_sidebar = true;
+
 					}
 				}
 				$content = caldera_theme_get_part( 'content', $partial, get_post() );
@@ -66,8 +70,8 @@ get_header(); ?>
 							echo $content;
 							echo '</div>';
 							if( $show_sidebar ) {
-							get_sidebar();
-						}  ?>
+								get_sidebar();
+							} ?>
 						</div>
 					</div>
 				</div>
@@ -76,7 +80,7 @@ get_header(); ?>
 
 		<?php
 
-		if ( have_posts() ) : ?>
+		if ( ( is_home() && is_archive() ) && have_posts() ) : ?>
 			<?php
 				if( theme::get_instance()->get_box_options()->use_boxes() ){
 					echo caldera_theme_get_part( 'boxes' );
@@ -93,9 +97,7 @@ get_header(); ?>
 			// Previous/next page navigation.
 			echo caldera_theme_pagination();
 
-		// If no content, include the "No posts found" template.
-		else :
-            echo caldera_theme_get_part( 'content', 'none' );
+
 
 		endif;
 		?>
