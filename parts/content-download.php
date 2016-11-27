@@ -9,16 +9,16 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 	<?php echo caldera_theme_get_part( 'single', 'top', $post  ); ?>
 
 
-	<div class="row" <?php if ( empty( $gallery ) ) : echo 'style="margin-bottom:12px;"'; endif; ?>>
+	<div class="row" <?php if ( empty( $gallery ) ) : echo 'style="margin-bottom:12px; "'; endif; ?>>
 		<?php
 			$gallery = caldera_theme_foogallery( theme::get_instance()->get_download_foo_gallery_id() );
 
 			if( ! empty( $gallery ) ){
-				echo '<div class="col-md-9 col-sm-12">' . $gallery . '</div>';
+				echo '<div class="col-md-9 col-sm-12" >' . $gallery . '</div>';
 			}?>
 
 
-		<div class="<?php if ( ! empty( $gallery ) ) : echo 'col-md-3'; endif; ?>col-sm-12">
+		<div class="<?php if ( ! empty( $gallery ) ) : echo 'col-md-3'; endif; ?> col-sm-12">
 			<?php if ( ! edd_is_free_download( $post->ID ) ) { ?>
 				<a href="#buy-now" class="btn-orange btn-block" title="Price Options">Buy Now</a>
 			<?php }else{ ?>
