@@ -5,7 +5,7 @@ if( ! isset( $post ) ){
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'row not-box well'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'row not-box '); ?>>
 
 
 	<div class="entry-header" role="heading">
@@ -32,3 +32,4 @@ if( ! isset( $post ) ){
     </footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
+<hr />

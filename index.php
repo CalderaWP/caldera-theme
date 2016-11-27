@@ -41,11 +41,16 @@ get_header(); ?>
 				}
 			}
 
+			if ( ( is_home() || is_archive() ) && have_posts() ){
+				$content = caldera_theme_get_part( 'loop' );
+			}
+
+
 			$show_sidebar = apply_filters( 'caldera_theme_show_sidebar', $show_sidebar );
 		   ?>
 
 			<section id="main-contain"><!-- start main-contain -->
-				<div class="container">
+
 					<div class="row">
 						<div class="col-sm-12">
 							<?php
@@ -75,34 +80,10 @@ get_header(); ?>
 							} ?>
 						</div>
 					</div>
-				</div>
+
 			</section><!--  -->
 
 
-		<?php
-
-		if ( ( is_home() || is_archive() ) && have_posts() ) : ?>
-			<?php
-				if( ! is_archive() && theme::get_instance()->get_box_options()->use_boxes() ){
-					echo caldera_theme_get_part( 'boxes' );
-				}else{
-
-					while ( have_posts()) {
-						the_post();
-						$__post = get_post( get_the_ID());
-						echo '<div class="container">' . caldera_theme_get_part('content',  'nonbox', get_post( get_the_ID()) ) . '</div>';
-
-					}
-
-				}
-
-			// Previous/next page navigation.
-			echo caldera_theme_pagination();
-
-
-
-		endif;
-		?>
 
 	</div><!-- .content-area #primary-->
 
