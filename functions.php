@@ -587,6 +587,9 @@ add_filter( 'the_content', function( $content) {
  */
 add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail',  10, 4 );
 function caldera_theme_alt_thumbnail( $value, $object_id, $meta_key, $single ){
+	if( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		return $value;
+	}
 	if( ! is_admin() &&  '_thumbnail_id' == $meta_key ){
 		if( $object_id !== get_the_ID() ){
 

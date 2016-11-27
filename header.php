@@ -54,7 +54,6 @@
 										<li><a href="<?php echo esc_url( get_permalink( 712 ) ); ?>">Add-ons</a></li>
 										<li role="separator" class="divider"></li>
 										<li><a href="https://Caldera.Space">Form To PDF</a></li>
-										<li><a href="http://form.works">FormWorks</a></li>
 									</ul>
 								</li>
 								<li class="dropdown">
@@ -99,9 +98,11 @@
 
 									</ul>
 								</li>
-
-
-
+								<li>
+									<a href="<?php echo esc_url( home_url( 'blog' ) ); ?>" title="Caldera Forms Blog">
+										Blog
+									</a>
+								</li>
 
 							</ul>
 						</div><!-- /.navbar-collapse -->
