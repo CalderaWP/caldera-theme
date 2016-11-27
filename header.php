@@ -40,8 +40,10 @@
 
 							<ul class="nav navbar-nav navbar-left">
                                 <li><a href="/" class="logo navbar-brand">
-                                    <span class=""><img style="height: 20px;width: auto;" src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/cf-name-banner-green-cropped-sm.png' ); ?>" class="" alt="Caldera Forms Banner with globe logo and name"></span>
-                                    <span class="title screen-reader-text">Caldera Forms</span>
+                                    <span class="">
+                                    <img style="height: 40px;width: auto;" src="<?php echo esc_url( caldera_theme_assets_uri() . '/images/caldera-globe-logo-sm.png' ); ?>" class="" alt="Caldera Forms Banner with globe logo and name">
+                                    </span>
+                                    <span class="title"><span id="title-caldera" style="color:#fff;">Caldera</span> <span id="title-forms" style="color:#a3bf61">Forms</span></span>
                                 </a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">

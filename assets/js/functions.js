@@ -256,4 +256,9 @@
 		$( '#' + CALDERA_THEME.activeTop ).addClass( 'active' );
 	} );
 
+	$( 'header .logo').mouseenter( function(){
+		$( '#title-forms' ).css( 'color', '#3a3a3c' );
+	}).mouseleave( function(){
+		$( '#title-forms' ).css( 'color', '#a3bf61' );
+	});
 } )( jQuery );
