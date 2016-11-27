@@ -41,6 +41,7 @@ get_header(); ?>
 				}
 			}
 
+			$show_sidebar = apply_filters( 'caldera_theme_show_sidebar', $show_sidebar );
 		   ?>
 
 			<section id="main-contain"><!-- start main-contain -->

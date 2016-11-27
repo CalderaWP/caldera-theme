@@ -487,7 +487,7 @@ function caldera_theme_limit_text($text, $limit){
 }
 
 function caldera_theme_recent_posts( array $args = [] ){
-    return caldera_theme_mini_loop( 'caldera-theme-recent-posts', $args );
+    return caldera_forms_theme_sidebar_loop( 'caldera-theme-recent-posts', $args );
 }
 
 
@@ -511,6 +511,10 @@ function caldera_theme_mini_loop( $wrap_class, array $args = [] ){
 
     return implode("\n\n", $out);
 }
+
+
+
+
 
 
 /**
