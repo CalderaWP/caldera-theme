@@ -22,7 +22,7 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 			<?php if ( ! edd_is_free_download( $post->ID ) ) { ?>
 				<a href="#buy-now" class="btn-orange btn-block" title="Price Options">Buy Now</a>
 			<?php }else{ ?>
-				<a href="#buy-now" class="btn-orange btn-block" title="Download Options">Download For Free</a>
+				<a href="#buy-now" class="btn-green btn-block" title="Download Options">Free</a>
 			<?php } ?>
 		</div>
 
@@ -107,8 +107,8 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 					echo '<p class="text-center"><a href="#" aria-hidden="true" style="display:none;visibility:hidden;" id="see-bundle-prices" title="View cost saving bundle pricing">See Bundle Prices</a></p>';
 				}
 			}else{
-				echo '<style>#free-plugin-buttons .edd_purchase_submit_wrapper a {margin: 0;}#free-plugin-buttons .edd_download_purchase_form {margin-bottom: 4px !important;}#free-plugin-buttons a.btn-block.btn-orange {margin-top: 0px;}</style>';
-				echo '<div class="row" id="free-plugin-buttons"><div class="col-sm-12 col-md-10 col-md-offset-1">';
+
+				echo '<div class="row buy-now-free-wrap" id="buy-now"><div class="col-sm-12 col-md-10 col-md-offset-1">';
 					$button = edd_get_purchase_link([
 							'download_id' => $post->ID,
 							'class' => 'btn-block btn-green',
@@ -121,7 +121,7 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 					$button = edd_get_purchase_link([
 						'download_id' => 20521,
 						'class' => 'bundle-button btn-block btn-green',
-						'text' => sprintf( 'Get All %d Free Add-ons', $count ),
+						'text' => sprintf( 'Get %d Free Plugins', $count ),
 						'price' => false,
 					]);
 					echo $button;
