@@ -61,7 +61,7 @@
 								<li class="dropdown">
 									<a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>" id="menu-item-getting-started" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Getting Started</a>
 									<ul class="dropdown-menu">
-										<li><a href="#">Getting Started Guide</a></li>
+										<li><a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>">Getting Started Guide</a></li>
 										<li><a href="https://www.youtube.com/playlist?list=PLgeaHmX3MoiuXOhRlDdYn7k0RcL4afLzQ">YouTube</a></li>
 									</ul>
 								</li>
