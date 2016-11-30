@@ -1,7 +1,7 @@
 <?php
 	use \calderawp\theme\theme;
 ?>
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -49,7 +49,7 @@
                             <ul class="nav navbar-nav navbar-right">
 
 								<li class="dropdown">
-									<a href="<?php echo esc_url( home_url() ); ?>" id="menu-item-home" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caldera Forms</a>
+									<a href="<?php echo esc_url( home_url() ); ?>" id="menu-item-home" class="menu-item dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Caldera Forms</a>
 									<ul class="dropdown-menu">
 										<li><a href="https://WordPress.org/plugins/caldera-forms" target="_blank">Get Started Free</a></li>
 										<li><a href="<?php echo esc_url( get_permalink( 23339 ) ); ?>">Save With Bundles</a></li>
@@ -59,14 +59,14 @@
 									</ul>
 								</li>
 								<li class="dropdown">
-									<a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>" id="menu-item-getting-started" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Getting Started</a>
+									<a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>" id="menu-item-getting-started" class="menu-item dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Getting Started</a>
 									<ul class="dropdown-menu">
 										<li><a href="<?php echo esc_url( home_url( 'getting-started' ) ); ?>">Getting Started Guide</a></li>
 										<li><a href="https://www.youtube.com/playlist?list=PLgeaHmX3MoiuXOhRlDdYn7k0RcL4afLzQ">YouTube</a></li>
 									</ul>
 								</li>
 								<li class="dropdown">
-									<a href="<?php echo esc_url( get_permalink( 1011 ) ); ?>" id="menu-item-1011" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support</a>
+									<a href="<?php echo esc_url( get_permalink( 1011 ) ); ?>" id="menu-item-1011" class="menu-item dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Support</a>
 									<ul class="dropdown-menu">
 										<?php
 											echo caldera_theme_menu_item( 1011 );
@@ -75,7 +75,7 @@
 									</ul>
 								</li>
 								<li class="dropdown">
-									<a href="<?php echo esc_url( get_permalink( 712 ) ); ?>" id="menu-item-712" class="menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add-ons</a>
+									<a href="<?php echo esc_url( get_permalink( 712 ) ); ?>" id="menu-item-712" class="menu-item dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">Add-ons</a>
 									<ul class="dropdown-menu">
 										<li>
 											<a href="<?php echo esc_url( get_permalink( 712 ) .'/#/payment' ); ?>">
@@ -89,7 +89,7 @@
 										</li>
 										<li>
                                             <a href="<?php echo esc_url( get_permalink( 712 ) .'/#/tools' ); ?>">
-                                            Tools
+                                                Tools
 											</a>
 										</li>
 										<li>
@@ -115,15 +115,6 @@
 <?php
 	endif;
 
-	/**
-	if ( ! is_front_page() ) {
-		if ( is_object( theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) && theme::get_instance()->get_settings( get_queried_object_id() )->full_width_header() ) {
-			echo caldera_theme_fullwidth_header();
-		}
-	}else{
-		do_action( 'caldera_theme_front_page_below_menu' );
-	}
-	**/
-	/**add-ons >**/
+	
 
 
