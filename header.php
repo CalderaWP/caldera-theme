@@ -42,9 +42,7 @@
                                 <?php do_action( 'caldera_theme_toppar_left' ); ?>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-
-
-
+                                <?php do_action( 'caldera_theme_toppar_right' ); ?>
 							</ul>
 						</div><!-- /.navbar-collapse -->
 					</nav>
