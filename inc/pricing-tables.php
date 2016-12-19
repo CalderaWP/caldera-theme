@@ -46,16 +46,6 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
     return $html;
 }
 
-/**
- * Show Bundles pricing table on the bundles page
- */
-add_filter( 'the_content', function( $content ){
-    if( is_page( 'caldera-forms-bundles' ) ){
-        $content .= caldera_theme_bundle_price_tables();
-    }
-
-    return $content;
-});
 
 
 function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '' ){
