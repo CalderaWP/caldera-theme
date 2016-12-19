@@ -27,9 +27,22 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
 
             <ul class="list-group list-group-flush text-center">
                 <?php
-                $pattern = '<li class="list-group-item"><i class="icon-ok text-success"></i> %s</li>';
+                $defaults = [
+                    'content' => '',
+                    'li_class' => '',
+                    'inner_class' => ''
+                ];
+                $pattern = '<li class="list-group-item %s"> <span class="%s">%s</span> </li>';
                 foreach ( $benefits as $benefit ){
-                    printf( $pattern, $benefit );
+                    if( is_array( $benefit ) ){
+                        $b = wp_parse_args( $benefit, $defaults );
+                    }else{
+                        $b = $defaults;
+                        $b[ 'content' ] = $benefit;
+                    }
+
+
+                    printf( $pattern, esc_attr( $b[ 'li_class' ] ), esc_attr( $b[ 'inner_class' ] ), $b[ 'content' ] );
                 }
 
                 ?>
@@ -101,12 +114,36 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $benefits[] = 'Priority Support';
         }
 
-        if( ! in_array( $bundle_id, [ 20520, 20521 ] ) ){
-            $benefits[] = 'Includes All Caldera Forms Add-ons';
+        if( 20518 == $bundle_id ){
+            $benefits[] =
+                [
+                    'content' => '$2400 Value',
+                    'li_class' => 'orange',
+                ];
+            $benefits[] = '15 Site License';
+
         }
 
+        if(  20520 == $bundle_id ){
+            $benefits[] =
+                [
+                    'content' => '$250 Value',
+                    'li_class' => 'orange',
+                ];
+            $benefits[] = '1 Site License';
+
+        }
+
+
+
         if( 20515 == $bundle_id ){
-            $benefits[] = 'Lifetime License';
+            $benefits[] =
+                [
+                    'content' => 'Lifetime License',
+                    'li_class' => 'orange',
+                ];
+            $benefits[] = 'Unlimited Sites';
+
         }
 
         $button = edd_get_purchase_link(
