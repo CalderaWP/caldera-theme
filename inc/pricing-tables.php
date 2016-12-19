@@ -61,7 +61,7 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
 
 
 
-function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '' ){
+function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '', $type = 'Caldera Forms add-ons' ){
    remove_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail', 10 );
 
     caldera_theme_pricing_style_css();
@@ -102,7 +102,16 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
         $contents_count = count( $contents ) - 1;
         $name = $bundle->post_title;
 
-        $modal_button_text =  sprintf( __( 'Includes %d Caldera Forms Add-ons', 'caldera_theme' ), $contents_count );
+        if( is_array( $type ) && isset( $type[ 'content' ] ) ){
+            $t = $type;
+            $type = '';
+            if( isset( $t[ 'count' ] ) ){
+                $contents_count = $t[ 'count' ];
+            }
+            $type = $t[ 'content' ];
+        }
+
+        $modal_button_text =  sprintf( __( 'Includes %d %s', 'caldera_theme' ), $contents_count, $type );
         $modal_button = caldera_theme_print_bundles_modal( $bundle_id, $modal_button_text );
         $benefits = [
             $modal_button
