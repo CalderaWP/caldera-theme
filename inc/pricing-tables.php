@@ -127,7 +127,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $benefits[] =
                 [
                     'content' => '$2400 Value',
-                    'li_class' => 'orange',
+                    'li_class' => 'green',
                 ];
             $benefits[] = '15 Site License';
 
@@ -137,7 +137,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $benefits[] =
                 [
                     'content' => '$250 Value',
-                    'li_class' => 'orange',
+                    'li_class' => 'green',
                 ];
             $benefits[] = '1 Site License';
 
