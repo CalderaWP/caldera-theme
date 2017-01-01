@@ -61,13 +61,14 @@ function caldera_theme_price_panel( $name, $price, $button, array $benefits = nu
 
 
 
-function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '', $type = 'Caldera Forms add-ons' ){
+function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = '', $type = 'Caldera Forms add-ons'  ){
    remove_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail', 10 );
 
     caldera_theme_pricing_style_css();
     if (empty($bundles)) {
         $bundles = caldera_theme_bundle_ids();
     }
+
 
     $count = count($bundles);
     $i = 4 - $count + 1;
@@ -94,6 +95,14 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $color = 'orange';
         }else{
             $color = 'grey';
+        }
+        $i++;
+
+        if( 20520 == $bundle_id ){
+            ob_start();
+            cf_dot_com_custom_bundle_lead_in( $width, true, 'Choose' );
+            $out[] = ob_get_clean();
+            continue;
         }
 
         $bundle = get_post( $bundle_id );
@@ -165,7 +174,6 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
         );
 
         $out[] = caldera_theme_price_panel( $name, $price, $button, $benefits, $color, $width );
-        $i++;
 
     }
     $out[] = '</div>';
