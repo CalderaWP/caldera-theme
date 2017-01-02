@@ -1,6 +1,6 @@
 <?php
 use \calderawp\theme\theme;
-define( 'CALDERA_THEME_VERSION', '0.1.3' );
+define( 'CALDERA_THEME_VERSION', '0.1.4' );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
