@@ -9,7 +9,8 @@
 	var $body, $window, $sidebar, adminbarOffset, top = false,
 	    bottom = false, windowWidth, windowHeight, lastWindowPos = 0,
 	    topOffset = 0, bodyHeight, sidebarHeight, resizeTimer,
-	    secondary, button;
+	    secondary, button, sidebarOffset;
+
 
 	function initMainNavigation( container ) {
 		// Add dropdown toggle that display child menu items.
@@ -119,24 +120,24 @@
 			if ( windowPos > lastWindowPos ) {
 				if ( top ) {
 					top = false;
-					topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+					topOffset = ( sid > 0 ) ? sidebarOffset - adminbarOffset : 0;
 					$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
-				} else if ( ! bottom && windowPos + windowHeight > sidebarHeight + $sidebar.offset().top && sidebarHeight + adminbarOffset < bodyHeight ) {
+				} else if ( ! bottom && windowPos + windowHeight > sidebarHeight + sidebarOffset && sidebarHeight + adminbarOffset < bodyHeight ) {
 					bottom = true;
 					$sidebar.attr( 'style', 'position: fixed; bottom: 0;' );
 				}
 			} else if ( windowPos < lastWindowPos ) {
 				if ( bottom ) {
 					bottom = false;
-					topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+					topOffset = ( sidebarOffset > 0 ) ? sidebarOffset - adminbarOffset : 0;
 					$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
-				} else if ( ! top && windowPos + adminbarOffset < $sidebar.offset().top ) {
+				} else if ( ! top && windowPos + adminbarOffset < sidebarOffset ) {
 					top = true;
 					$sidebar.attr( 'style', 'position: fixed;' );
 				}
 			} else {
 				top = bottom = false;
-				topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+				topOffset = ( sidebarOffset > 0 ) ? sidebarOffset - adminbarOffset : 0;
 				$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
 			}
 		} else if ( ! top ) {
@@ -156,6 +157,12 @@
 		$body          = $( document.body );
 		$window        = $( window );
 		$sidebar       = $( '#sidebar' ).first();
+		if( 'undefined' == typeof $sidebar.offset() ){
+			sidebarOffset =  0;
+		}else{
+			sidebarOffset = $sidebar.offset().top;
+		}
+
 		adminbarOffset = $body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
 
 		$window
