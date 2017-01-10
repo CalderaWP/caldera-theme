@@ -467,21 +467,27 @@ function caldera_theme_fullwidth_header( $id = 0 ){
  * @return string
  */
 function caldera_theme_get_excerpt(  $post ){
-    if( ! empty( $post->post_excerpt ) ){
-        $excerpt = $post->post_excerpt;
-    }else{
-        $excerpt = $post->post_content;
-    }
-
-    return caldera_theme_limit_text( $excerpt, 55 );
+    $excerpt =  preg_replace("/<img[^>]+\>/i", "",  get_the_excerpt( $post ) );
+	return caldera_theme_limit_text( $excerpt, 55 );
 
 }
 
+/**
+ * Limit text to 55 words.
+ *
+ * @param $text
+ * @param $limit
+ *
+ * @return string
+ */
 function caldera_theme_limit_text($text, $limit){
     if (str_word_count($text, 0) > $limit) {
         $words = str_word_count($text, 2);
         $pos = array_keys($words);
-        $text = substr($text, 0, $pos[$limit]) . '...';
+
+      $text = substr($text, 0, $pos[$limit]);
+
+        $text .= '...';
     }
     return $text;
 }
