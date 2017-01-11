@@ -616,3 +616,36 @@ function caldera_theme_alt_thumbnail( $value, $object_id, $meta_key, $single ){
 	return $value;
 }
 
+
+
+add_action('login_head', function() {
+	echo '<style type="text/css">
+h1 a {background-image: url("' .  esc_url( caldera_theme_add_protocol( 'd1dy2qw4671tuy.cloudfront.net/images/caldera-globe-logo-md.png' ) ) .'") !important; }
+input#wp-submit {
+    background-color: #ff7e30;
+    text-shadow: initial;
+    -webkit-box-shadow: 0 1px 0 #000;
+     box-shadow: 0 1px 0 #000;
+    color: #fff;
+    text-decoration: none;
+    width:100%;
+    margin-top: 4px;
+  
+}
+
+input#wp-submit:hover {
+    background-color: #a3bf61;
+    text-shadow: initial;
+    -webkit-box-shadow: 0 1px 0 #fff;
+     box-shadow: 0 1px 0 #fff;
+    color: #fff;
+    text-decoration: none;
+  
+}
+
+form#loginform label {
+    color: #000;
+}
+</style>';
+} );
+
