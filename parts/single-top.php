@@ -15,10 +15,16 @@ if ( theme::get_instance()->get_settings(get_queried_object_id())->full_width_he
 } else {
     $full_width = false;
 }
+$author_meta = '';
+
+if (  'post' == get_post_type( $post ) ) {
+    $author_meta = caldera_theme_get_part( 'author', 'bio' );
+}
+
 if ( !$full_width ) {
-    printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title($post));
-}else{
-    printf('<div class="entry-header screen-reader-text" role="heading"><h1 class="page-title">%s</h1></div>', get_the_title($post));
+    printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1>%s</div>', get_the_title( $post ), $author_meta );
+} else {
+    printf( '<div class="entry-header screen-reader-text" role="heading"><h1 class="page-title">%s</h1>%s</div>', get_the_title( $post ), $author_meta );
 }
 
 ?>
