@@ -37,7 +37,7 @@ if ( ! function_exists( 'caldera_theme_entry_meta' ) ) :
      */
     function caldera_theme_entry_meta() {
         if ( is_sticky() && is_home() && ! is_paged() ) {
-            printf( '<span class="sticky-post">%s</span>', __( 'Featured', 'caldera_theme' ) );
+            printf( '<span class="sticky-post">%s</span> ', __( 'Featured', 'caldera_theme' ) );
         }
 
         $format = get_post_format();

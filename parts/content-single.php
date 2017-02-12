@@ -26,7 +26,20 @@ global  $post;
 	?>
 
 	<footer class="entry-footer">
-		<?php caldera_theme_entry_meta(); ?>
+		<?php
+		if ( is_single() ) :
+			$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'caldera_theme' ) );
+			if ( $categories_list && caldera_theme_categorized_blog() ) {
+				printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>', _x( 'Categories', 'Used before category names.', 'caldera_theme' ), $categories_list );
+			}
+
+
+			$tags_list = get_the_tag_list( '', _x( ', ', 'Used between list items, there is a space after the comma.', 'caldera_theme' ) );
+			if ( $tags_list ) {
+				printf( '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>', _x( 'Tags', 'Used before tag names.', 'caldera_theme' ), $tags_list );
+			}
+		endif;
+		?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
