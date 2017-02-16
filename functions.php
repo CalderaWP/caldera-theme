@@ -467,8 +467,10 @@ function caldera_theme_fullwidth_header( $id = 0 ){
  * @return string
  */
 function caldera_theme_get_excerpt(  $post ){
+	$caldera_excerpt_length = 55;
+	$caldera_excerpt_length = apply_filters( 'caldera_excerpt_length', $caldera_excerpt_length );
     $excerpt =  preg_replace("/<img[^>]+\>/i", "",  get_the_excerpt( $post ) );
-	return caldera_theme_limit_text( $excerpt, 55 );
+	return caldera_theme_limit_text( $excerpt, $caldera_excerpt_length );
 
 }
 
