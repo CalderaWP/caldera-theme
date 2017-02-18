@@ -565,22 +565,6 @@ function caldera_theme_menu_item( $post, $title = '' ){
     );
 }
 
-/**
- * On addons page get HTML for Angular App
- */
-add_filter( 'the_content', function( $content) {
-    if( is_page( 'caldera-forms-add-ons' ) ){
-        ob_start();
-        include  __DIR__ . '/parts/addons.php';
-
-        $content = ob_get_clean();
-    }
-
-    return $content;
-});
-
-
-
 
 /**
  * Use alt thumbnail if possible
