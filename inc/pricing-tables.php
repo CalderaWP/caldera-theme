@@ -152,6 +152,29 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
 
         }
 
+        if( 48255 == $bundle_id ){
+            $benefits[] =
+                [
+                    'content' => '$2500 Value',
+                    'li_class' => 'orange',
+                ];
+            $benefits[] =
+                [
+                    'content' => 'Includes Easy Pods',
+                    'li_class' => 'green',
+                ];
+            $benefits[] =
+                [
+                    'content' => 'Includes Easy Queries',
+                    'li_class' => 'green',
+                ];
+            $benefits[] =
+                [
+                    'content' => 'Access To Private Facebook Group',
+                    'li_class' => 'green',
+                ];
+        }
+
 
 
         if( 20515 == $bundle_id ){
