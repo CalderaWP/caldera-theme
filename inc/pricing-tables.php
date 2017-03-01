@@ -120,7 +120,13 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $type = $t[ 'content' ];
         }
 
-        $modal_button_text =  sprintf( __( 'Includes %d %s', 'caldera_theme' ), $contents_count, $type );
+        if( in_array($bundle_id, [ 20518, 48255 ] ) ){
+            $modal_button_text =  __( 'Includes All Caldera Forms Add-ons', 'caldera_theme'  );
+
+        }else{
+            $modal_button_text =  sprintf( __( 'Includes %d %s', 'caldera_theme' ), $contents_count, $type );
+
+        }
         $modal_button = caldera_theme_print_bundles_modal( $bundle_id, $modal_button_text );
         $benefits = [
             $modal_button
