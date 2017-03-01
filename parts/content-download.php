@@ -41,17 +41,18 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 
 
 	<?php
-
+	$bundles = [];
 	if ( ! edd_is_free_download( $post->ID )) {
-	$prices = edd_get_variable_prices($post->ID);
+		$prices = edd_get_variable_prices( $post->ID );
 
-	caldera_theme_pricing_style_css();
-	$benefits = [
-		'Use On Unlimited Forms',
-		'Priority Support'
-	];
-	$bundles = caldera_theme_bundle_included_in($post->ID);
+		caldera_theme_pricing_style_css();
+		$benefits = [
+			'Use On Unlimited Forms',
+			'Priority Support'
+		];
+		$bundles  = caldera_theme_bundle_included_in( $post->ID );
 
+	}
 
 	?>
 	<div id="buy-now" class="container well">
@@ -59,54 +60,7 @@ remove_filter( 'edd_after_download_content', 'edd_append_purchase_link' );
 			if (!empty($bundles)) {
 				echo caldera_theme_bundle_price_tables($bundles, $post->post_title);
 			}
-			?>
-			<div
-				class="row price-table-wrap single-product-price-table" <?php if (!empty($bundles)) : echo 'aria-hidden="true" style="display:none;visibility:hidden;"'; endif; ?>>
-
-				<?php
-
-				$ii = 1;
-				foreach ($prices as $i => $price) {
-					if (1 == $ii) {
-						$color = 'grey';
-					} elseif (2 == $ii) {
-						$color = 'green';
-					} elseif (3 == $ii) {
-						$color = 'orange';
-					} else {
-						break;
-					}
-
-					if (!empty($price['index'])) {
-						$price_id = $price['index'];
-					} else {
-						$price_id = $i;
-					}
-
-					$name = $prices[$price_id]['name'];
-					if (0 === strpos($name, 'Up To')) {
-						$name = str_replace('Up To', '', $name);
-					}
-
-					$button = edd_get_purchase_link(
-						[
-							'download_id' => $post->ID,
-							'class' => 'bundle-button btn btn-lg btn-block btn-primary',
-							'text' => 'Buy Now',
-							'price_id' => $price_id,
-							'price' => false,
-						]
-					);
-
-					$price = $prices[$price_id]['amount'];
-					echo caldera_theme_price_panel($name, $price, $button, $benefits, $color);
-
-					$ii++;
-				}
-				if (!empty($bundles)) {
-					echo '<p class="text-center"><a href="#" aria-hidden="true" style="display:none;visibility:hidden;" id="see-bundle-prices" title="View cost saving bundle pricing">See Bundle Prices</a></p>';
-				}
-			}else{
+			else{
 
 				echo '<div class="row buy-now-free-wrap" id="buy-now"><div class="col-sm-12 col-md-10 col-md-offset-1">';
 					$button = edd_get_purchase_link([
