@@ -22,7 +22,7 @@ if (  'post' == get_post_type( $post ) ) {
 }
 
 if ( !$full_width ) {
-    printf('<div class="entry-header" role="heading"><h1 class="page-title">%s</h1>%s %s</div>', get_the_title( $post ), sprintf( '<span class="image main">%s</span>', caldera_theme_thumbnail( $post, 'img-responsive', 'full' ) ), $author_meta );
+	printf( '<div class="entry-header" role="heading"><h1 class="page-title">%s</h1>%s %s</div>', get_the_title( $post ), sprintf( '<span class="image main">%s</span>', caldera_theme_thumbnail( $post, 'img-responsive', 'full' ) ), $author_meta );
 } else {
     printf( '<div class="entry-header screen-reader-text" role="heading"><h1 class="page-title">%s</h1>%s</div>', get_the_title( $post ), $author_meta );
 }

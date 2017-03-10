@@ -106,6 +106,10 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
         }
 
         $bundle = get_post( $bundle_id );
+        if( ! is_object( $bundle ) ){
+            continue;
+        }
+
         $price = edd_get_download_price( $bundle_id );
         $contents = edd_get_bundled_products( $bundle_id );
         $contents_count = count( $contents ) - 1;
