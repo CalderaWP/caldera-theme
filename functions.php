@@ -595,7 +595,9 @@ function caldera_theme_alt_thumbnail( $value, $object_id, $meta_key, $single ){
 }
 
 
-
+/**
+ * Login CSSs
+ */
 add_action('login_head', function() {
 	echo '<style type="text/css">
 h1 a {background-image: url("' .  esc_url( caldera_theme_add_protocol( 'd1dy2qw4671tuy.cloudfront.net/images/caldera-globe-logo-md.png' ) ) .'") !important; }
@@ -627,3 +629,9 @@ form#loginform label {
 </style>';
 } );
 
+/**
+ * Change login logo link
+ */
+add_filter( 'login_headerurl',function(){
+	return home_url();
+});
