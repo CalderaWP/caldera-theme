@@ -206,7 +206,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             ]
         );
 
-        $out[] = caldera_theme_price_panel( $name, $price, $button, $benefits, $color, $width );
+        $out[] = sprintf( '<div id="%s" class="cf-bundle-wrap">%s</div>', esc_attr( 'cf-bundle-wrap-' . $bundle_id ), caldera_theme_price_panel( $name, $price, $button, $benefits, $color, $width ) );
 
     }
     $out[] = '</div>';

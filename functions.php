@@ -321,6 +321,7 @@ function caldera_theme_get_part( $first, $second = null, $post = null ){
     }
     $name .= '.php';
 
+	$name = apply_filters( 'caldera_theme_get_part', $name, $first, $second, $post );
 
     $path = locate_template( $name );
     if( file_exists( $path ) ) {

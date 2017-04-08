@@ -10,7 +10,7 @@ if( ! isset( $post ) ){
 }
 
 
-$time = $author_meta =  '';
+$time = $time_string = $author_meta =  '';
 if ( theme::get_instance()->get_settings(get_queried_object_id())->full_width_header() ) {
 	$full_width = true;
 } else {
