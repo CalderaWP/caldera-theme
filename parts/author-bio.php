@@ -21,7 +21,8 @@ if( $author_url ) {
 		<h3 class="author-title" >
 			<span class="screen-reader-text">
 				<?php _e( 'By', 'caldera_theme' ); ?>
-			</span> <?php echo $author; ?></h3>
+			</span>  <span class="vcard author"><span class="fn"><?php echo $author; ?></span></span>
+			</h3>
 		<p class="author-bio hidden-xs">
 			<?php the_author_meta( 'description' ); ?>
 		</p><!-- .author-bio -->
