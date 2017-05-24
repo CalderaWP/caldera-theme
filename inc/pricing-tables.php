@@ -98,13 +98,6 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
         }
         $i++;
 
-        if( 20520 == $bundle_id ){
-            ob_start();
-            cf_dot_com_custom_bundle_lead_in( $width, true, 'Choose' );
-            $out[] = ob_get_clean();
-            continue;
-        }
-
         $bundle = get_post( $bundle_id );
         if( ! is_object( $bundle ) ){
             continue;
@@ -138,36 +131,62 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
 
         if( 20521 == $bundle_id ){
             $benefits[] = 'Free :)';
+            $benefits[] = 'Responsive, Multi-Page Forms, Conditional Logic, File Uploads';
+	        $benefits[] = 'Multilingual Forms';
+	        $benefits[] = 'Front-End Editing';
+	        $benefits[] = 'Powerful email';
+	        $benefits[] = 'A/B Testing';
         }else{
             $benefits[] = 'Priority Support';
         }
 
         if( 20518 == $bundle_id ){
-            $benefits[] =
+	        $benefits[] = '20 Site License';
+	        $benefits[] = 'Responsive, Multi-Page Forms, Conditional Logic, File Uploads';
+	        $benefits[] =
                 [
-                    'content' => '$2400 Value',
+                    'content' => '$450+ Value',
                     'li_class' => 'green',
                 ];
-            $benefits[] = '15 Site License';
+	        $benefits[] =
+		        [
+			        'content' => 'All Developer Add-Ons',
+			        'li_class' => 'green',
+		        ];
+	        $benefits[] = 'Mailchimp';
+	        $benefits[] = 'Stripe';
+	        $benefits[] = 'Customized Email Templates';
 
         }
 
         if(  20520 == $bundle_id ){
-            $benefits[] =
+	        $benefits[] = '1 Site License';
+	        $benefits[] = 'Responsive, Multi-Page Forms, Conditional Logic, File Uploads';
+	        $benefits[] =
                 [
-                    'content' => '$250 Value',
+                    'content' => '$225+ Value',
                     'li_class' => 'green',
                 ];
-            $benefits[] = '1 Site License';
+	        $benefits[] = 'PayPal';
+	        $benefits[] = 'Connected Forms';
+	        $benefits[] = 'Partial Submissions';
+	        $benefits[] = 'User Registration';
 
         }
 
         if( 48255 == $bundle_id ){
-            $benefits[] =
+	        $benefits[] = 'Unlimited Sites';
+	        $benefits[] = 'Responsive, Multi-Page Forms, Conditional Logic, File Uploads';
+	        $benefits[] =
                 [
-                    'content' => '$2500 Value',
+                    'content' => '$2000+ Value',
                     'li_class' => 'orange',
                 ];
+	        $benefits[] =
+		        [
+			        'content' => 'All Current & Future Add-Ons',
+			        'li_class' => 'green',
+		        ];
             $benefits[] =
                 [
                     'content' => 'Includes Easy Pods',
@@ -178,11 +197,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
                     'content' => 'Includes Easy Queries',
                     'li_class' => 'green',
                 ];
-            $benefits[] =
-                [
-                    'content' => 'Access To Private Facebook Group',
-                    'li_class' => 'green',
-                ];
+	        $benefits[] = 'Access To Caldera Labs Slack';
         }
 
 
