@@ -309,7 +309,6 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/pricing-tables.php';
 
 
-
 function caldera_theme_get_part( $first, $second = null, $post = null ){
     if( null == $post ){
         $post = get_post();
@@ -570,7 +569,7 @@ function caldera_theme_menu_item( $post, $title = '' ){
 /**
  * Use alt thumbnail if possible
  */
-add_filter( 'get_post_metadata', 'caldera_theme_alt_thumbnail',  10, 4 );
+add_filter( '-get_post_metadata', 'caldera_theme_alt_thumbnail',  10, 4 );
 function caldera_theme_alt_thumbnail( $value, $object_id, $meta_key, $single ){
 	if( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 		return $value;

@@ -25,7 +25,7 @@ class Caldera_Theme_Modal{
             $button_attrs .= sprintf( '%s="%s"', $attr, esc_attr( $value ) );
         }
 
-        $this->button = sprintf( '<button type="button" %s data-toggle="modal" data-target="#%s">%s</button>', $button_attrs, $id, wp_kses_post( $button_text ) );
+        $this->button = sprintf( '<a role="button" type="button" %s data-toggle="modal" data-target="#%s">%s</a>', $button_attrs, $id, wp_kses_post( $button_text ) );
     }
 
     protected function make_body( $id, $title, $content ){
