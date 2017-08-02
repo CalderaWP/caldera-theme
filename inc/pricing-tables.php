@@ -117,7 +117,7 @@ function caldera_theme_bundle_price_tables(array $bundles = [], $upsell_title = 
             $type = $t[ 'content' ];
         }
 
-        if( in_array($bundle_id, [ 20518, 48255 ] ) ){
+        if( in_array($bundle_id, [ 48255 ] ) ){
             $modal_button_text =  __( 'Includes All Caldera Forms Add-ons', 'caldera_theme'  );
 
         }else{
